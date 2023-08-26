@@ -1,11 +1,34 @@
 /* eslint-disable import/prefer-default-export */
 import { Plan } from '@/constants/plan';
 import app from '@/modules/firebase';
-import { getDatabase, ref, set } from 'firebase/database';
+import {
+  get,
+  getDatabase,
+  limitToLast,
+  push,
+  query,
+  ref,
+  set,
+} from 'firebase/database';
 
-const sendPlan = (planData: Plan) => {
+export const sendPlan = (planData: Plan) => {
   const db = getDatabase(app);
-  set(ref(db, `plans/${planData.uniqueCode}`), planData);
+  const planRef = ref(db, 'plans');
+  const newPlanRef = push(planRef, planData);
+  if (!newPlanRef.key) throw new Error('Error while sending plan');
+  set(newPlanRef, planData);
+  return newPlanRef.key;
 };
 
-export { sendPlan };
+export const getPlan = async (planId: string) => {
+  const db = getDatabase(app);
+  const planRef = ref(db, `plans/${planId}`);
+  return (await get(planRef)).val() as Plan;
+};
+
+export const getNewestPlan = async () => {
+  const db = getDatabase(app);
+  const planRef = ref(db, 'plans');
+  const latestPostRef = query(planRef, limitToLast(1));
+  return (await get(latestPostRef)).val() as Plan;
+};

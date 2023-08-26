@@ -13,6 +13,7 @@ const config: Config = {
         'primary-light': 'var(--primary-light)',
         'secondary-dark': 'var(--secondary-dark)',
         'secondary-light': 'var(--secondary-light)',
+        'secondary-light-hover': 'var(--secondary-light-hover)',
         'accent-light': 'var(--accent-light)',
       },
     },

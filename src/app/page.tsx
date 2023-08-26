@@ -1,27 +1,23 @@
-'use client';
-
-import Card from '@/components/layout/Card';
-import { Plan } from '@/constants/plan';
-import { sendPlan } from '@/services/firebase.services';
+import CreationButton from '@/components/home/CreationButton';
+import Description from '@/components/home/Description';
+import ExistingButton from '@/components/home/ExistingButton';
+import Card from '@/components/shared/Card';
 import React from 'react';
 
-const page = () => {
-  const buttonPush = () => {
-    sendPlan({
-      uniqueCode: 'test',
-    } as Plan);
-  };
-
-  return (
-    <main className="flex h-screen justify-center items-center gap-8">
-      <Card>
-        <button onClick={buttonPush}>Create New</button>
+const page = async () => (
+  <main className="h-screen flex justify-center items-center">
+    <div className="grid gap-1 grid-cols-2 max-w-2xl">
+      <Card className="p-12 col-span-full flex flex-col gap-4 text-secondary-dark">
+        <Description />
       </Card>
-      <Card>
-        <button>Find Existing</button>
+      <Card className="text-5xl p-12 font-medium hover:bg-secondary-light-hover">
+        <CreationButton />
       </Card>
-    </main>
-  );
-};
+      <Card className="text-5xl p-12 font-medium hover:bg-secondary-light-hover">
+        <ExistingButton />
+      </Card>
+    </div>
+  </main>
+);
 
 export default page;
