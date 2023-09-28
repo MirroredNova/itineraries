@@ -2,9 +2,11 @@
 import { Plan } from '@/constants/plan';
 import app from '@/modules/firebase';
 import {
+  equalTo,
   get,
   getDatabase,
   limitToLast,
+  orderByChild,
   push,
   query,
   ref,
@@ -26,9 +28,25 @@ export const getPlan = async (planId: string) => {
   return (await get(planRef)).val() as Plan;
 };
 
+export const getPlanByCode = async (uniqueCode: string) => {
+  const db = getDatabase(app);
+  const planRef = ref(db, 'plans');
+  const planQuery = query(
+    planRef,
+    orderByChild('uniqueCode'),
+    equalTo(uniqueCode),
+    limitToLast(1),
+  );
+  const plan = (await get(planQuery)).val();
+  if (!plan) return null;
+  return Object.keys(plan)[0] as string;
+};
+
 export const getNewestPlan = async () => {
   const db = getDatabase(app);
   const planRef = ref(db, 'plans');
   const latestPostRef = query(planRef, limitToLast(1));
-  return (await get(latestPostRef)).val() as Plan;
+  const newestPlan = (await get(latestPostRef)).val();
+  if (!newestPlan) return null;
+  return newestPlan[Object.keys(newestPlan)[0]] as Plan;
 };

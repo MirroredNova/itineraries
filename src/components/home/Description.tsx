@@ -11,7 +11,7 @@ const Description = () => (
     </p>
     <p>
       Create a plan by outlining flights, hotel stays, and day to day plans. No
-      detail can go uncaptured
+      detail can go uncaptured.
     </p>
     <p>
       Please note that any plan you create is not private. Anyone with the link
