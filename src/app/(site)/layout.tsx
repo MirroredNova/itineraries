@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Providers from '../providers';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,14 +14,16 @@ const notoDisplay = Inter({
   display: 'swap',
 });
 
-export default function RootLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode;
-}) {
+};
+
+export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className={`${notoDisplay.variable}`}>
-      <body className="bg-primary-dark">{children}</body>
+    <html lang="en" className={`${notoDisplay.variable} light`}>
+      <body className="bg-primary-dark">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

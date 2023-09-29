@@ -7,7 +7,7 @@ type Props = {
 };
 
 const PlanContainer = ({ plan }: Props) => (
-  <Card className="flex flex-col p-4">
+  <Card className="flex flex-col p-4 w-1/2">
     <div className="flex flex-row gap-4">
       <h2>Your Plan</h2>
       <button type="button">Save</button>
