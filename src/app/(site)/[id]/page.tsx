@@ -1,8 +1,8 @@
 import Information from '@/components/plan/Information';
 import OptionsList from '@/components/plan/OptionsList';
 import PlanContainer from '@/components/plan/PlanContainer';
-import Card from '@/components/shared/Card';
 import { getPlan } from '@/services/firebase.services';
+import { Card } from '@nextui-org/card';
 import React from 'react';
 
 type Props = {

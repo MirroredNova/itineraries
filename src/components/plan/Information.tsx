@@ -1,6 +1,6 @@
 import { Plan } from '@/constants/plan';
+import { Card } from '@nextui-org/card';
 import React from 'react';
-import Card from '../shared/Card';
 
 type Props = {
   plan: Plan;

@@ -1,3 +1,5 @@
+"use client"
+
 import { Card } from '@nextui-org/card';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import React from 'react';
