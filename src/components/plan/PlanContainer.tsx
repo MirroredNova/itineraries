@@ -1,5 +1,6 @@
 import { Plan } from '@/constants/plan';
-import { Card } from '@nextui-org/card';
+import { Card, CardHeader, CardBody } from '@nextui-org/card';
+import { Button } from '@nextui-org/button';
 import React from 'react';
 
 type Props = {
@@ -7,14 +8,18 @@ type Props = {
 };
 
 const PlanContainer = ({ plan }: Props) => (
-  <Card className="flex flex-col p-4 w-1/2 h-fit">
-    <div className="flex flex-row gap-4 justify-around">
-      <h2><b>Your Plan</b></h2>
-      <button type="button">Save</button>
-    </div>
-    <div>
+  <Card className="flex flex-col w-1/2 h-fit">
+    <CardHeader className="justify-around">
+      <h2>
+        <b>Your Plan</b>
+      </h2>
+      <Button color="primary" variant="solid">
+        Save
+      </Button>
+    </CardHeader>
+    <CardBody>
       {plan.chunks && plan.chunks.map((chunk, i) => <p key={+i}>{chunk}</p>)}
-    </div>
+    </CardBody>
   </Card>
 );
 

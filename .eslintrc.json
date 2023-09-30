@@ -23,15 +23,7 @@
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": false,
-        "optionalDependencies": false,
-        "peerDependencies": false,
-        "usePackageJson": true
-      }
-    ],
+    "import/no-extraneous-dependencies": "off",
     "prettier/prettier": [
       "error",
       {

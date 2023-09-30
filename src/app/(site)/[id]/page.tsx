@@ -25,13 +25,10 @@ const page = async ({ params: { id } }: Props) => {
   return (
     <main className="h-screen">
       <div className="flex justify-center">
-        <div className="flex flex-row gap-4 max-w-5xl w-full justify-between p-6 pt-24">
+        <div className="flex flex-row gap-4 max-w-7xl w-full justify-between p-6 pt-24">
           <div className="flex flex-col gap-4 w-1/2">
             <Information plan={planData} />
-            <div className="flex flex-row gap-4">
-              <OptionsList />
-              <Card className="p-4 w-1/2">Form Card</Card>
-            </div>
+            <OptionsList />
           </div>
           <PlanContainer plan={planData} />
         </div>
