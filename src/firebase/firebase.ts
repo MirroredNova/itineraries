@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { getApps, initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAS-lANG8DguglTyF2MJHfRgZ4b7GU2JVc',
@@ -10,6 +10,7 @@ const firebaseConfig = {
   databaseURL: 'https://itineraries-36463-default-rtdb.firebaseio.com/',
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
 export default app;

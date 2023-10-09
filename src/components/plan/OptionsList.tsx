@@ -2,14 +2,42 @@
 
 import { Card } from '@nextui-org/card';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
-import React from 'react';
-import { categories } from '@/constants/plan';
+import React, { useState } from 'react';
 import { Listbox, ListboxItem } from '@nextui-org/listbox';
+import { categories } from '@/constants/forms';
+import { Plan } from '@/constants/plan';
 
-const OptionsList = () => {
-  const [activeForm, setActiveForm] = React.useState<JSX.Element>(
-    categories[0].options[0].form,
+type Props = {
+  refreshPlanData: () => void;
+  planData: Plan;
+  id: string;
+};
+
+const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
+  const [activeSelection, setActiveSelection] = useState({
+    categoryId: categories[0].id,
+    optionId: categories[0].options[0].id,
+  });
+
+  const activeCategory = categories.find(
+    (category) => category.id === activeSelection.categoryId,
   );
+  const activeOption =
+    activeCategory &&
+    activeCategory.options.find(
+      (option) => option.id === activeSelection.optionId,
+    );
+
+  const renderForm = () =>
+    activeOption && activeOption.form ? (
+      <activeOption.form
+        {...{
+          refreshPlanData,
+          planData,
+          id,
+        }}
+      />
+    ) : null;
 
   return (
     <div className="flex flex-row gap-4">
@@ -29,7 +57,12 @@ const OptionsList = () => {
                 {(item) => (
                   <ListboxItem
                     key={item.id}
-                    onPress={() => setActiveForm(item.form)}
+                    onPress={() =>
+                      setActiveSelection({
+                        categoryId: category.id,
+                        optionId: item.id,
+                      })
+                    }
                   >
                     {item.accordionLabel}
                   </ListboxItem>
@@ -39,7 +72,7 @@ const OptionsList = () => {
           ))}
         </Accordion>
       </Card>
-      <Card className="p-4 grow h-fit">{activeForm}</Card>
+      <Card className="p-4 grow h-fit">{renderForm()}</Card>
     </div>
   );
 };

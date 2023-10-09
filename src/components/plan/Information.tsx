@@ -1,16 +1,29 @@
-import { Plan } from '@/constants/plan';
+import { Plan, PlanConfig } from '@/constants/plan';
 import { Card } from '@nextui-org/card';
 import React from 'react';
 
 type Props = {
   plan: Plan;
+  id: string;
 };
 
-const Information = ({ plan }: Props) => (
+const Information = ({ plan, id }: Props) => (
   <Card className="text-center p-4">
     <h2>
-      Unique Code: <b>{plan.uniqueCode}</b>
+      Unique Code: <b>{id}</b>
     </h2>
+    <hr className="my-2" />
+    {plan.configs &&
+      plan.configs.map((config: PlanConfig) => (
+        <div key={config.type}>
+          <p key={config.type}>
+            {config.type}:{' '}
+            <b>
+              <span>{config.data}</span>
+            </b>
+          </p>
+        </div>
+      ))}
   </Card>
 );
 

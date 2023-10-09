@@ -1,7 +1,7 @@
 'use client';
 
-import { Plan } from '@/constants/plan';
-import { getNewestPlan, sendPlan } from '@/services/firebase.services';
+import { defaultPlan } from '@/constants/plan';
+import { getNewestPlan, createPlan } from '@/services/firebase.services';
 import { incrementCode, startingCode } from '@/services/plan.services';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -11,18 +11,13 @@ const CreationButton = () => {
 
   const newPlanHandler = async () => {
     const newestPlan = await getNewestPlan();
-    let planToAdd = {};
-    if (newestPlan) {
-      planToAdd = {
-        uniqueCode: incrementCode(newestPlan.uniqueCode),
-      };
-    } else {
-      planToAdd = {
-        uniqueCode: startingCode,
-      };
+    const codeToAdd = newestPlan ? newestPlan.key : startingCode;
+    const newCode = incrementCode(codeToAdd);
+    const success = await createPlan(defaultPlan, newCode);
+    if (!success) {
+      return;
     }
-    const planKey = sendPlan(planToAdd as Plan);
-    const safeId = encodeURIComponent(planKey);
+    const safeId = encodeURIComponent(newCode);
     push(`/${safeId}`);
   };
 

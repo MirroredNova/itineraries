@@ -1,6 +1,6 @@
 'use client';
 
-import { getPlanByCode } from '@/services/firebase.services';
+import { getPlan } from '@/services/firebase.services';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -11,8 +11,8 @@ const ExistingButton = () => {
   const { push } = useRouter();
 
   const existinPlanHandler = async () => {
-    const planKey = await getPlanByCode(planCode);
-    if (!planKey) {
+    const plan = await getPlan(planCode);
+    if (!plan) {
       setPlanCode('');
       setInputError(true);
       setTimeout(() => {
@@ -20,7 +20,7 @@ const ExistingButton = () => {
       }, 2000);
       return;
     }
-    const safeId = encodeURIComponent(planKey);
+    const safeId = encodeURIComponent(planCode);
     push(`/${safeId}`);
   };
 
