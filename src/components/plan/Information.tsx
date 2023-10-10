@@ -1,5 +1,6 @@
 import { Plan, PlanConfig } from '@/constants/plan';
 import { Card } from '@nextui-org/card';
+import { Divider } from '@nextui-org/divider';
 import React from 'react';
 
 type Props = {
@@ -12,7 +13,7 @@ const Information = ({ plan, id }: Props) => (
     <h2>
       Unique Code: <b>{id}</b>
     </h2>
-    <hr className="my-2" />
+    <Divider className="my-2" />
     {plan.configs &&
       plan.configs.map((config: PlanConfig) => (
         <div key={config.type}>

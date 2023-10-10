@@ -1,11 +1,10 @@
-'use client';
-
 import { Card } from '@nextui-org/card';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import React, { useState } from 'react';
 import { Listbox, ListboxItem } from '@nextui-org/listbox';
 import { categories } from '@/constants/forms';
-import { Plan } from '@/constants/plan';
+import { Plan, PlanConfig } from '@/constants/plan';
+import { updatePlan } from '@/services/firebase.services';
 
 type Props = {
   refreshPlanData: () => void;
@@ -28,20 +27,43 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
       (option) => option.id === activeSelection.optionId,
     );
 
+  const getHandleConfigSubmit =
+    (FORM_KEY: string, data: string) =>
+    (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault();
+      const newConfig: PlanConfig = {
+        type: FORM_KEY,
+        data,
+      };
+      const index = planData.configs
+        ? planData.configs.findIndex((config) => config.type === FORM_KEY)
+        : -1;
+      const updatedPlanData: Plan = {
+        ...planData,
+      };
+      if (index > -1) {
+        updatedPlanData.configs[index] = newConfig;
+      } else {
+        updatedPlanData.configs = updatedPlanData.configs || [];
+        updatedPlanData.configs.push(newConfig);
+      }
+      updatePlan(id, updatedPlanData);
+      refreshPlanData();
+    };
+
   const renderForm = () =>
     activeOption && activeOption.form ? (
       <activeOption.form
         {...{
-          refreshPlanData,
           planData,
-          id,
+          getHandleConfigSubmit,
         }}
       />
     ) : null;
 
   return (
     <div className="flex flex-row gap-4">
-      <Card className="p-4 w-fit min-w-fit">
+      <Card className="p-4 w-fit min-w-fit h-fit">
         <Accordion
           isCompact
           selectionMode="multiple"

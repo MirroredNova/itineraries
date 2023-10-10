@@ -2,6 +2,7 @@ import FlightForm from '@/components/plan/forms/FlightForm';
 import NameForm from '@/components/plan/forms/NameForm';
 import OriginAirportForm from '@/components/plan/forms/OriginAirportForm';
 import OriginDateForm from '@/components/plan/forms/OriginDateForm';
+import TripLengthForm from '@/components/plan/forms/TripLengthForm';
 
 export const categories = [
   {
@@ -18,7 +19,7 @@ export const categories = [
         id: '4',
         type: 'Trip Length',
         accordionLabel: 'Trip Length',
-        form: NameForm,
+        form: TripLengthForm,
       },
       {
         id: '2',

@@ -1,47 +1,26 @@
 import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
-import React, { useState } from 'react';
-import { Plan, PlanConfig } from '@/constants/plan';
-import { updatePlan } from '@/services/firebase.services';
+import React, { FormEvent, useState } from 'react';
+import { Plan } from '@/constants/plan';
 import Form from '@/components/shared/Form';
 
 type Props = {
-  refreshPlanData: () => void;
   planData: Plan;
-  id: string;
+  getHandleConfigSubmit: (
+    FORM_KEY: string,
+    data: string,
+  ) => (e: FormEvent<HTMLFormElement>) => void;
 };
 
 const FORM_KEY = 'Name';
 
-const NameForm = ({ refreshPlanData, planData, id }: Props) => {
+const NameForm = ({ getHandleConfigSubmit, planData }: Props) => {
   const [name, setName] = useState(
     planData.configs?.find((config) => config.type === FORM_KEY)?.data || '',
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const nameConfig: PlanConfig = {
-      type: FORM_KEY,
-      data: name,
-    };
-    const index = planData.configs
-      ? planData.configs.findIndex((config) => config.type === FORM_KEY)
-      : -1;
-    const updatedPlanData: Plan = {
-      ...planData,
-    };
-    if (index > -1) {
-      updatedPlanData.configs[index] = nameConfig;
-    } else {
-      updatedPlanData.configs = updatedPlanData.configs || [];
-      updatedPlanData.configs.push(nameConfig);
-    }
-    updatePlan(id, updatedPlanData);
-    refreshPlanData();
-  };
-
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={getHandleConfigSubmit(FORM_KEY, name)}>
       <Input
         type="text"
         placeholder="Plan Name"
