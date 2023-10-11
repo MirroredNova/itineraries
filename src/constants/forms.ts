@@ -1,8 +1,8 @@
-import FlightForm from '@/components/plan/forms/FlightForm';
-import NameForm from '@/components/plan/forms/NameForm';
-import OriginAirportForm from '@/components/plan/forms/OriginAirportForm';
-import OriginDateForm from '@/components/plan/forms/OriginDateForm';
-import TripLengthForm from '@/components/plan/forms/TripLengthForm';
+import FlightForm from '@/components/plan/forms/blockForms/FlightForm';
+import NameForm from '@/components/plan/forms/configForms/NameForm';
+import OriginAirportForm from '@/components/plan/forms/configForms/OriginAirportForm';
+import OriginDateForm from '@/components/plan/forms/configForms/OriginDateForm';
+import TripLengthForm from '@/components/plan/forms/configForms/TripLengthForm';
 
 export const categories = [
   {

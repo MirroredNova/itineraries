@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { Card } from '@nextui-org/card';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
-import React, { useState } from 'react';
 import { Listbox, ListboxItem } from '@nextui-org/listbox';
 import { categories } from '@/constants/forms';
 import { Plan, PlanConfig } from '@/constants/plan';
@@ -28,9 +28,10 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
     );
 
   const getHandleConfigSubmit =
-    (FORM_KEY: string, data: string) =>
+    (FORM_KEY: string, data: string | undefined) =>
     (e: React.FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
+      if (!data) return;
       const newConfig: PlanConfig = {
         type: FORM_KEY,
         data,

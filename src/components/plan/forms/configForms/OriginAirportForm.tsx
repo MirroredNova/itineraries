@@ -1,20 +1,12 @@
 import Form from '@/components/shared/Form';
 import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
-import React, { FormEvent, useState } from 'react';
-import { Plan } from '@/constants/plan';
-
-type Props = {
-  planData: Plan;
-  getHandleConfigSubmit: (
-    FORM_KEY: string,
-    data: string,
-  ) => (e: FormEvent<HTMLFormElement>) => void;
-};
+import React, { useState } from 'react';
+import { FormProps } from '@/constants/props';
 
 const FORM_KEY = 'Origin Airport';
 
-const OriginAirportForm = ({ planData, getHandleConfigSubmit }: Props) => {
+const OriginAirportForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
   const [originAirport, setOriginAirport] = useState<string>(
     planData.configs?.find((config) => config.type === FORM_KEY)?.data || '',
   );

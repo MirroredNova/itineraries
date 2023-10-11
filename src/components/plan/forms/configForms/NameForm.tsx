@@ -1,20 +1,12 @@
 import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
-import React, { FormEvent, useState } from 'react';
-import { Plan } from '@/constants/plan';
+import React, { useState } from 'react';
 import Form from '@/components/shared/Form';
-
-type Props = {
-  planData: Plan;
-  getHandleConfigSubmit: (
-    FORM_KEY: string,
-    data: string,
-  ) => (e: FormEvent<HTMLFormElement>) => void;
-};
+import { FormProps } from '@/constants/props';
 
 const FORM_KEY = 'Name';
 
-const NameForm = ({ getHandleConfigSubmit, planData }: Props) => {
+const NameForm = ({ getHandleConfigSubmit, planData }: FormProps) => {
   const [name, setName] = useState(
     planData.configs?.find((config) => config.type === FORM_KEY)?.data || '',
   );
