@@ -3,7 +3,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { getPlan } from '@/services/firebase.services';
 import { Plan } from '@/constants/plan';
-import { Card } from '@nextui-org/card';
+import Card from '@mui/material/Card';
 import Information from './Information';
 import OptionsList from './OptionsList';
 import PlanContainer from './PlanContainer';

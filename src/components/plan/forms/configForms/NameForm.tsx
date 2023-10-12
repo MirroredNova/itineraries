@@ -1,8 +1,7 @@
-import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
 import React, { useState } from 'react';
 import Form from '@/components/shared/Form';
 import { FormProps } from '@/constants/props';
+import TextField from '@mui/material/TextField';
 
 const FORM_KEY = 'Name';
 
@@ -13,16 +12,13 @@ const NameForm = ({ getHandleConfigSubmit, planData }: FormProps) => {
 
   return (
     <Form onSubmit={getHandleConfigSubmit(FORM_KEY, name)}>
-      <Input
+      <TextField
         type="text"
         placeholder="Plan Name"
         label="Plan Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <Button type="submit" color="primary" variant="solid" className="w-fit">
-        Add
-      </Button>
     </Form>
   );
 };

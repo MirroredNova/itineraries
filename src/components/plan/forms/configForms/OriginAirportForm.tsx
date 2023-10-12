@@ -1,6 +1,5 @@
 import Form from '@/components/shared/Form';
-import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
+import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 import { FormProps } from '@/constants/props';
 
@@ -13,16 +12,13 @@ const OriginAirportForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
 
   return (
     <Form onSubmit={getHandleConfigSubmit(FORM_KEY, originAirport)}>
-      <Input
+      <TextField
         type="text"
         placeholder="Origin Airport"
         label="Origin Airport"
         value={originAirport}
         onChange={(e) => setOriginAirport(e.target.value)}
       />
-      <Button type="submit" color="primary" variant="solid" className="w-fit">
-        Add
-      </Button>
     </Form>
   );
 };

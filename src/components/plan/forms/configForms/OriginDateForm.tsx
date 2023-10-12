@@ -1,7 +1,6 @@
 import React from 'react';
 import Form from '@/components/shared/Form';
-import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
+import TextField from '@mui/material/TextField';
 import { FormProps } from '@/constants/props';
 import { formatDate } from '@/services/utility.services';
 
@@ -16,16 +15,13 @@ const OriginDateForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
 
   return (
     <Form onSubmit={getHandleConfigSubmit(FORM_KEY, formatDate(originDate))}>
-      <Input
+      <TextField
         type="date"
         placeholder="Origin Date"
         label="Origin Date"
         value={originDate.toISOString().split('T')[0]}
         onChange={(e) => setOriginDate(new Date(e.target.value))}
       />
-      <Button type="submit" color="primary" variant="solid" className="w-fit">
-        Add
-      </Button>
     </Form>
   );
 };

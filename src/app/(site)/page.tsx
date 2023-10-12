@@ -1,7 +1,7 @@
 import CreationButton from '@/components/home/CreationButton';
 import Description from '@/components/home/Description';
 import ExistingButton from '@/components/home/ExistingButton';
-import { Card } from '@nextui-org/card';
+import Card from '@mui/material/Card';
 import React from 'react';
 
 const page = () => (

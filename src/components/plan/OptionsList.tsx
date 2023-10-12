@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Card } from '@nextui-org/card';
-import { Accordion, AccordionItem } from '@nextui-org/accordion';
-import { Listbox, ListboxItem } from '@nextui-org/listbox';
+import Card from '@mui/material/Card';
 import { categories } from '@/constants/forms';
 import { Plan, PlanConfig } from '@/constants/plan';
 import { updatePlan } from '@/services/firebase.services';
+import List from '@mui/material/List';
+import { ListItemButton, ListItemText, Collapse } from '@mui/material';
 
 type Props = {
   refreshPlanData: () => void;
@@ -17,6 +17,11 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
     categoryId: categories[0].id,
     optionId: categories[0].options[0].id,
   });
+  const [open, setOpen] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   const activeCategory = categories.find(
     (category) => category.id === activeSelection.categoryId,
@@ -65,7 +70,19 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
   return (
     <div className="flex flex-row gap-4">
       <Card className="p-4 w-fit min-w-fit h-fit">
-        <Accordion
+        <List>
+          <ListItemButton onClick={handleClick}>
+            <ListItemText primary="Inbox" />
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemText primary="Starred" />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </List>
+        {/* <Accordion
           isCompact
           selectionMode="multiple"
           defaultExpandedKeys={['1']}
@@ -93,7 +110,7 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
               </Listbox>
             </AccordionItem>
           ))}
-        </Accordion>
+        </Accordion> */}
       </Card>
       <Card className="p-4 grow h-fit">{renderForm()}</Card>
     </div>

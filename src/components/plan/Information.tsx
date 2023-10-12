@@ -1,6 +1,6 @@
 import { Plan, PlanConfig } from '@/constants/plan';
-import { Card } from '@nextui-org/card';
-import { Divider } from '@nextui-org/divider';
+import Card from '@mui/material/Card';
+import Divider from '@mui/material/Divider';
 import React from 'react';
 
 type Props = {

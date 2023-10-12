@@ -1,9 +1,8 @@
-import Form from '@/components/shared/Form';
-import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
 import React, { useState } from 'react';
-import { Select, SelectItem } from '@nextui-org/select';
+import Form from '@/components/shared/Form';
+import TextField from '@mui/material/TextField';
 import { FormProps } from '@/constants/props';
+import MenuItem from '@mui/material/MenuItem';
 
 const units = [
   { label: 'Days', value: 'Days' },
@@ -28,7 +27,7 @@ const TripLengthForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
 
   return (
     <Form onSubmit={getHandleConfigSubmit(FORM_KEY, `${unit} - ${length}`)}>
-      <Select
+      {/* <Select
         items={units}
         label="Length Unit"
         placeholder="Select a unit"
@@ -38,17 +37,27 @@ const TripLengthForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
         onChange={(e) => setUnit(e.target.value)}
       >
         {(u) => <SelectItem key={u.value}>{u.label}</SelectItem>}
-      </Select>
-      <Input
+      </Select> */}
+      <TextField
+        id="unit-select"
+        select
+        value={unit}
+        label="Unit"
+        onChange={(e) => setUnit(e.target.value)}
+      >
+        {units.map((u) => (
+          <MenuItem key={u.value} value={u.value}>
+            {u.label}
+          </MenuItem>
+        ))}
+      </TextField>
+      <TextField
         type="number"
         placeholder="Trip Length"
         label="Trip Length"
         value={length}
         onChange={(e) => setLength(e.target.value)}
       />
-      <Button type="submit" color="primary" variant="solid" className="w-fit">
-        Add
-      </Button>
     </Form>
   );
 };
