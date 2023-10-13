@@ -3,8 +3,22 @@ import NameForm from '@/components/plan/forms/configForms/NameForm';
 import OriginAirportForm from '@/components/plan/forms/configForms/OriginAirportForm';
 import OriginDateForm from '@/components/plan/forms/configForms/OriginDateForm';
 import TripLengthForm from '@/components/plan/forms/configForms/TripLengthForm';
+import { FormProps } from './props';
 
-export const categories = [
+export type Category = {
+  id: string;
+  headerLabel: string;
+  options: Option[];
+};
+
+export type Option = {
+  id: string;
+  type: string;
+  accordionLabel: string;
+  form: ({ getHandleConfigSubmit, planData }: FormProps) => React.JSX.Element;
+};
+
+export const categories: Category[] = [
   {
     id: '1',
     headerLabel: 'Configuration',

@@ -3,8 +3,8 @@ import Card from '@mui/material/Card';
 import { categories } from '@/constants/forms';
 import { Plan, PlanConfig } from '@/constants/plan';
 import { updatePlan } from '@/services/firebase.services';
-import List from '@mui/material/List';
-import { ListItemButton, ListItemText, Collapse } from '@mui/material';
+import { Divider, List } from '@mui/material';
+import OptionsListItem from './OptionsListItem';
 
 type Props = {
   refreshPlanData: () => void;
@@ -17,11 +17,6 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
     categoryId: categories[0].id,
     optionId: categories[0].options[0].id,
   });
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
 
   const activeCategory = categories.find(
     (category) => category.id === activeSelection.categoryId,
@@ -69,48 +64,19 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
 
   return (
     <div className="flex flex-row gap-4">
-      <Card className="p-4 w-fit min-w-fit h-fit">
+      <Card className="w-fit min-w-fit h-fit">
         <List>
-          <ListItemButton onClick={handleClick}>
-            <ListItemText primary="Inbox" />
-          </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Starred" />
-              </ListItemButton>
-            </List>
-          </Collapse>
-        </List>
-        {/* <Accordion
-          isCompact
-          selectionMode="multiple"
-          defaultExpandedKeys={['1']}
-        >
-          {categories.map((category) => (
-            <AccordionItem
-              key={category.id}
-              aria-label={category.headerLabel}
-              title={category.headerLabel}
-            >
-              <Listbox items={category.options} aria-label="dynamic listbox">
-                {(item) => (
-                  <ListboxItem
-                    key={item.id}
-                    onPress={() =>
-                      setActiveSelection({
-                        categoryId: category.id,
-                        optionId: item.id,
-                      })
-                    }
-                  >
-                    {item.accordionLabel}
-                  </ListboxItem>
-                )}
-              </Listbox>
-            </AccordionItem>
+          {categories.map((category, i) => (
+            <>
+              <OptionsListItem
+                key={category.id}
+                category={category}
+                setActiveSelection={setActiveSelection}
+              />
+              {i < categories.length - 1 && <Divider className="my-2" />}
+            </>
           ))}
-        </Accordion> */}
+        </List>
       </Card>
       <Card className="p-4 grow h-fit">{renderForm()}</Card>
     </div>

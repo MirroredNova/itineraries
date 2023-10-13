@@ -9,8 +9,18 @@
   --secondary-light: #FFFFFF;
   --secondary-light-hover: #d5d5d5;
   --accent-light: #FFB922;
+  --accent-dark: #d7970c;
 }
 
 html {
   font-family: var(--font-noto-display);
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+  background-color: var(--accent-light);
+  color: var(--secondary-dark);
+}
+
+button:hover, [type="button"]:hover, [type="reset"]:hover, [type="submit"]:hover {
+  background-color: var(--accent-dark);
 }

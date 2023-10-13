@@ -4,6 +4,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { getPlan } from '@/services/firebase.services';
 import { Plan } from '@/constants/plan';
 import Card from '@mui/material/Card';
+import CircularProgress from '@mui/material/CircularProgress';
 import Information from './Information';
 import OptionsList from './OptionsList';
 import PlanContainer from './PlanContainer';
@@ -44,7 +45,9 @@ const Body = ({ id }: Props) => {
 
   if (loading) {
     return (
-      <Card className="text-5xl p-12 font-medium h-fit mt-24">Loading...</Card>
+      <Card className="p-8 h-fit mt-24">
+        <CircularProgress />
+      </Card>
     );
   }
 
