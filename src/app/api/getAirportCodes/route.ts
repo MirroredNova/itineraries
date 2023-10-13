@@ -1,1 +1,3 @@
-export async function GET() {}
+export async function GET() {
+  console.log('GET /api/getAirportCodes');
+}
