@@ -19,7 +19,8 @@ const PlanContainer = ({ plan }: Props) => (
       </Button>
     </CardContent>
     <CardContent>
-      {plan.chunks && plan.chunks.map((chunk, i) => <p key={+i}>{chunk}</p>)}
+      {plan.chunks &&
+        plan.chunks.map((chunk, i) => <p key={+i}>{chunk.type}</p>)}
     </CardContent>
   </Card>
 );

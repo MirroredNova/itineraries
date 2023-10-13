@@ -27,17 +27,6 @@ const TripLengthForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
 
   return (
     <Form onSubmit={getHandleConfigSubmit(FORM_KEY, `${unit} - ${length}`)}>
-      {/* <Select
-        items={units}
-        label="Length Unit"
-        placeholder="Select a unit"
-        fullWidth
-        value={unit}
-        defaultSelectedKeys={[unit]}
-        onChange={(e) => setUnit(e.target.value)}
-      >
-        {(u) => <SelectItem key={u.value}>{u.label}</SelectItem>}
-      </Select> */}
       <TextField
         id="unit-select"
         select

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import { categories } from '@/constants/forms';
-import { Plan, PlanConfig } from '@/constants/plan';
+import { Plan, PlanChunk, PlanConfig } from '@/constants/plan';
 import { updatePlan } from '@/services/firebase.services';
 import { Divider, List } from '@mui/material';
+import { ConfigDataType, ChunkDataType } from '@/constants/props';
 import OptionsListItem from './OptionsListItem';
 
 type Props = {
@@ -21,6 +22,7 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
   const activeCategory = categories.find(
     (category) => category.id === activeSelection.categoryId,
   );
+
   const activeOption =
     activeCategory &&
     activeCategory.options.find(
@@ -28,7 +30,7 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
     );
 
   const getHandleConfigSubmit =
-    (FORM_KEY: string, data: string | undefined) =>
+    (FORM_KEY: string, data: ConfigDataType) =>
     (e: React.FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
       if (!data) return;
@@ -52,12 +54,31 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
       refreshPlanData();
     };
 
+  const getHandleChunkSubmit =
+    (FORM_KEY: string, data: ChunkDataType) =>
+    (e: React.FormEvent<HTMLFormElement>): void => {
+      e.preventDefault();
+      if (!data) return;
+      const newChunk: PlanChunk = {
+        type: FORM_KEY,
+        data,
+      };
+      const updatedPlanData: Plan = {
+        ...planData,
+      };
+      updatedPlanData.chunks = updatedPlanData.chunks || [];
+      updatedPlanData.chunks.push(newChunk);
+      updatePlan(id, updatedPlanData);
+      refreshPlanData();
+    };
+
   const renderForm = () =>
     activeOption && activeOption.form ? (
       <activeOption.form
         {...{
           planData,
           getHandleConfigSubmit,
+          getHandleChunkSubmit,
         }}
       />
     ) : null;
@@ -67,14 +88,13 @@ const OptionsList = ({ refreshPlanData, planData, id }: Props) => {
       <Card className="w-fit min-w-fit h-fit">
         <List>
           {categories.map((category, i) => (
-            <>
+            <React.Fragment key={category.id}>
               <OptionsListItem
-                key={category.id}
                 category={category}
                 setActiveSelection={setActiveSelection}
               />
               {i < categories.length - 1 && <Divider className="my-2" />}
-            </>
+            </React.Fragment>
           ))}
         </List>
       </Card>

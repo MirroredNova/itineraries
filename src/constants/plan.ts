@@ -3,10 +3,15 @@ export type PlanConfig = {
   data: string;
 };
 
+export type PlanChunk = {
+  type: string;
+  data: object;
+};
+
 export type Plan = {
   dateCreated: string;
   label: string;
-  chunks: [];
+  chunks: PlanChunk[];
   configs: PlanConfig[];
 };
 

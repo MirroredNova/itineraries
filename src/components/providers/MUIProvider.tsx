@@ -3,7 +3,25 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 
-const theme = createTheme();
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#FFB922 !important',
+          color: '#333333',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '0.5rem',
+        },
+      },
+    },
+  },
+});
 
 type Props = {
   children: React.ReactNode;

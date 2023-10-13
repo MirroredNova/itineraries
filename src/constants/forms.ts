@@ -15,7 +15,7 @@ export type Option = {
   id: string;
   type: string;
   accordionLabel: string;
-  form: ({ getHandleConfigSubmit, planData }: FormProps) => React.JSX.Element;
+  form: (props: FormProps) => React.JSX.Element;
 };
 
 export const categories: Category[] = [
