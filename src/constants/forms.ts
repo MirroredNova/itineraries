@@ -3,6 +3,7 @@ import NameForm from '@/components/plan/forms/configForms/NameForm';
 import OriginAirportForm from '@/components/plan/forms/configForms/OriginAirportForm';
 import OriginDateForm from '@/components/plan/forms/configForms/OriginDateForm';
 import TripLengthForm from '@/components/plan/forms/configForms/TripLengthForm';
+import HotelForm from '@/components/plan/forms/blockForms/HotelForm';
 import { FormProps } from './props';
 
 export type Category = {
@@ -63,13 +64,7 @@ export const categories: Category[] = [
         id: '2',
         type: 'Hotel',
         accordionLabel: 'Hotel',
-        form: FlightForm,
-      },
-      {
-        id: '3',
-        type: 'Rental',
-        accordionLabel: 'Rental',
-        form: FlightForm,
+        form: HotelForm,
       },
     ],
   },

@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import React from 'react';
+import { typeToChunkMap } from '@/constants/maps';
 
 type Props = {
   plan: Plan;
@@ -19,8 +20,15 @@ const PlanContainer = ({ plan }: Props) => (
       </Button>
     </CardContent>
     <CardContent>
-      {plan.chunks &&
-        plan.chunks.map((chunk, i) => <p key={+i}>{chunk.type}</p>)}
+      {plan.chunks && plan.chunks.length > 0 && (
+        <div className="flex flex-col gap-4">
+          {plan.chunks.map((chunk, i) => {
+            const ChunkComponent = typeToChunkMap.get(chunk.type);
+            if (!ChunkComponent) return null;
+            return <ChunkComponent key={i} chunkData={chunk.data} />;
+          })}
+        </div>
+      )}
     </CardContent>
   </Card>
 );
