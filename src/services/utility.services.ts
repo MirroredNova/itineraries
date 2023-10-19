@@ -1,6 +1,15 @@
-export const formatDate = (date: Date) => {
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${month}/${day}/${year}`;
+import dayjs, { Dayjs } from 'dayjs';
+
+export const formatDatetimeAsString = (date: Dayjs | null) => {
+  if (!date) {
+    return '';
+  }
+  return date.format('YYYY-MM-DD HH:mm:ss');
+};
+
+export const parseDatetimeFromString = (date: string | undefined) => {
+  if (!date) {
+    return null;
+  }
+  return dayjs(date, 'YYYY-MM-DD HH:mm:ss');
 };

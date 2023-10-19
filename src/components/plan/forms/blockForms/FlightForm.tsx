@@ -2,23 +2,36 @@ import React from 'react';
 import Form from '@/components/shared/Form';
 import TextField from '@mui/material/TextField';
 import { FormProps } from '@/constants/props';
-import { formatDate } from '@/services/utility.services';
+import { formatDatetimeAsString } from '@/services/utility.services';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { Dayjs } from 'dayjs';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const FORM_KEY = 'Flight';
 
 const FlightForm = ({ getHandleChunkSubmit }: FormProps) => {
   const [origin, setOrigin] = React.useState<string>('');
   const [destination, setDestination] = React.useState<string>('');
-  const [departureDate, setDepartureDate] = React.useState<Date>(new Date());
-  const [arrivalDate, setArrivalDate] = React.useState<Date>(new Date());
+  const [departureDate, setDepartureDate] = React.useState<Dayjs | null>(null);
+  const [arrivalDate, setArrivalDate] = React.useState<Dayjs | null>(null);
+  const [airports, setAirports] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    const fetchAirports = async () => {
+      const response = await fetch('/api/getAirportCodes');
+      const airportData = await response.json();
+      setAirports(airportData);
+    };
+    fetchAirports();
+  }, []);
 
   return (
     <Form
       onSubmit={getHandleChunkSubmit(FORM_KEY, {
         origin,
         destination,
-        departureDate: formatDate(departureDate),
-        arrivalDate: formatDate(arrivalDate),
+        departureDate: formatDatetimeAsString(departureDate),
+        arrivalDate: formatDatetimeAsString(arrivalDate),
       })}
     >
       <TextField
@@ -35,34 +48,28 @@ const FlightForm = ({ getHandleChunkSubmit }: FormProps) => {
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
       />
-      {/* <Autocomplete
+      <Autocomplete
         id="tags-outlined"
-        options={top100Films}
+        options={airports}
         filterSelectedOptions
         renderOption={(props, option) => (
-          <li {...props} key={option.label}>
-            {option.label}
+          <li {...props} key={option}>
+            {option}
           </li>
         )}
         renderInput={(params) => (
           <TextField {...params} label="Tags" placeholder="Tag" />
         )}
-      /> */}
-      <TextField
-        type="date"
-        placeholder="Departure Date"
-        label="Departure Date"
-        InputLabelProps={{ shrink: true }}
-        value={departureDate.toISOString().split('T')[0]}
-        onChange={(e) => setDepartureDate(new Date(e.target.value))}
       />
-      <TextField
-        type="date"
-        placeholder="Arrival Date"
+      <DateTimePicker
+        label="Departure Date"
+        value={departureDate}
+        onChange={(newValue) => setDepartureDate(newValue)}
+      />
+      <DateTimePicker
         label="Arrival Date"
-        InputLabelProps={{ shrink: true }}
-        value={arrivalDate.toISOString().split('T')[0]}
-        onChange={(e) => setArrivalDate(new Date(e.target.value))}
+        value={arrivalDate}
+        onChange={(newValue) => setArrivalDate(newValue)}
       />
     </Form>
   );

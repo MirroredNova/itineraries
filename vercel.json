@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/crons/getAirportCodes",
+      "schedule": "0 1 * * *"
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import { categories } from '@/constants/forms';
 import { Plan, PlanChunk, PlanConfig } from '@/constants/plan';
-import { updatePlan } from '@/services/firebase.services';
+import { updatePlan } from '@/services/realtime.services';
 import { Divider, List } from '@mui/material';
 import { ConfigDataType, ChunkDataType } from '@/constants/props';
 import OptionsListItem from './OptionsListItem';

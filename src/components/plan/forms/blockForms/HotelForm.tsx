@@ -1,21 +1,24 @@
 import Form from '@/components/shared/Form';
 import { FormProps } from '@/constants/props';
 import TextField from '@mui/material/TextField';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import { Dayjs } from 'dayjs';
 import React from 'react';
+import { formatDatetimeAsString } from '@/services/utility.services';
 
 const FORM_KEY = 'Hotel';
 
 const HotelForm = ({ getHandleChunkSubmit }: FormProps) => {
   const [hotelName, setHotelName] = React.useState<string>('');
-  const [checkInDate, setCheckInDate] = React.useState<Date>(new Date());
-  const [checkOutDate, setCheckOutDate] = React.useState<Date>(new Date());
+  const [checkInDate, setCheckInDate] = React.useState<Dayjs | null>(null);
+  const [checkOutDate, setCheckOutDate] = React.useState<Dayjs | null>(null);
 
   return (
     <Form
       onSubmit={getHandleChunkSubmit(FORM_KEY, {
         hotelName,
-        checkInDate: checkInDate.toISOString().split('T')[0],
-        checkOutDate: checkOutDate.toISOString().split('T')[0],
+        checkInDate: formatDatetimeAsString(checkInDate),
+        checkOutDate: formatDatetimeAsString(checkOutDate),
       })}
     >
       <TextField
@@ -25,19 +28,15 @@ const HotelForm = ({ getHandleChunkSubmit }: FormProps) => {
         value={hotelName}
         onChange={(e) => setHotelName(e.target.value)}
       />
-      <TextField
-        type="date"
-        placeholder="Check In Date"
+      <DateTimePicker
         label="Check In Date"
-        value={checkInDate.toISOString().split('T')[0]}
-        onChange={(e) => setCheckInDate(new Date(e.target.value))}
+        value={checkInDate}
+        onChange={(newValue) => setCheckInDate(newValue)}
       />
-      <TextField
-        type="date"
-        placeholder="Check Out Date"
+      <DateTimePicker
         label="Check Out Date"
-        value={checkOutDate.toISOString().split('T')[0]}
-        onChange={(e) => setCheckOutDate(new Date(e.target.value))}
+        value={checkOutDate}
+        onChange={(newValue) => setCheckOutDate(newValue)}
       />
     </Form>
   );

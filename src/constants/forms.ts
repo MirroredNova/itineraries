@@ -22,7 +22,7 @@ export type Option = {
 export const categories: Category[] = [
   {
     id: '1',
-    headerLabel: 'Configuration',
+    headerLabel: 'Settings',
     options: [
       {
         id: '1',
@@ -52,7 +52,7 @@ export const categories: Category[] = [
   },
   {
     id: '2',
-    headerLabel: 'Add New',
+    headerLabel: 'Add Chunk',
     options: [
       {
         id: '1',
@@ -65,6 +65,30 @@ export const categories: Category[] = [
         type: 'Hotel',
         accordionLabel: 'Hotel',
         form: HotelForm,
+      },
+    ],
+  },
+  {
+    id: '3',
+    headerLabel: 'Add Grouping',
+    options: [
+      {
+        id: '1',
+        type: 'Day',
+        accordionLabel: 'Day',
+        form: FlightForm,
+      },
+      {
+        id: '2',
+        type: 'Trip',
+        accordionLabel: 'Trip',
+        form: FlightForm,
+      },
+      {
+        id: '3',
+        type: 'Group',
+        accordionLabel: 'Group',
+        form: FlightForm,
       },
     ],
   },

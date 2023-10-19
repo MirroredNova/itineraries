@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useCallback, useState } from 'react';
-import { getPlan } from '@/services/firebase.services';
+import { getPlan } from '@/services/realtime.services';
 import { Plan } from '@/constants/plan';
 import Card from '@mui/material/Card';
 import CircularProgress from '@mui/material/CircularProgress';

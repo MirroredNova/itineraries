@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import MUIProvider from '@/components/providers/MUIProvider';
+import LocalizationProvider from '@/components/providers/LocalizationProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +22,9 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={`${inter.variable} light`}>
       <body className="bg-primary-dark">
-        <MUIProvider>{children}</MUIProvider>
+        <LocalizationProvider>
+          <MUIProvider>{children}</MUIProvider>
+        </LocalizationProvider>
       </body>
     </html>
   );

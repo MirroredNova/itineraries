@@ -1,7 +1,7 @@
 'use client';
 
 import { defaultPlan } from '@/constants/plan';
-import { getNewestPlan, createPlan } from '@/services/firebase.services';
+import { getNewestPlan, createPlan } from '@/services/realtime.services';
 import { incrementCode, startingCode } from '@/services/plan.services';
 import { useRouter } from 'next/navigation';
 import React from 'react';

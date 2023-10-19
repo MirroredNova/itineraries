@@ -1,6 +1,6 @@
 'use client';
 
-import { getPlan } from '@/services/firebase.services';
+import { getPlan } from '@/services/realtime.services';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 

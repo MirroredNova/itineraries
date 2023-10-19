@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+// import { AirportReduced } from '@/constants/airports';
 import { Plan } from '@/constants/plan';
 import app from '@/firebase/firebase';
 import {
@@ -43,3 +44,16 @@ export const getNewestPlan = async () => {
   const key = Object.keys(newestPlan)[0];
   return { key, plan: newestPlan[key] as Plan };
 };
+
+// export const updateData = async (dataName: string, data: object) => {
+//   const dataRef = ref(db, `data/${dataName}`);
+//   await set(dataRef, data);
+//   return true;
+// };
+
+// export const getAirportData = async () => {
+//   const dataRef = ref(db, 'data/airports');
+//   const snapshot = await get(dataRef);
+//   if (!snapshot.exists()) return null;
+//   return snapshot.val() as AirportReduced[];
+// };
