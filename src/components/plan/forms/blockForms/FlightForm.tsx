@@ -1,50 +1,19 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import Form from '@/components/shared/Form';
-import TextField from '@mui/material/TextField';
 import { FormProps } from '@/constants/props';
 import { formatDatetimeAsString } from '@/services/utility.services';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { Dayjs } from 'dayjs';
-import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
+
+import AirportAutocomplete from '../../inputs/AirportAutocomplete';
 
 const FORM_KEY = 'Flight';
 
 const FlightForm = ({ getHandleChunkSubmit }: FormProps) => {
   const [origin, setOrigin] = React.useState<string | null>(null);
-  const [destination, setDestination] = React.useState<string>('');
+  const [destination, setDestination] = React.useState<string | null>(null);
   const [departureDate, setDepartureDate] = React.useState<Dayjs | null>(null);
   const [arrivalDate, setArrivalDate] = React.useState<Dayjs | null>(null);
-  const [airports, setAirports] = React.useState<string[]>([]);
-  const [typingTimeout, setTypingTimeout] = React.useState<NodeJS.Timeout>();
-  const [loading, setLoading] = React.useState<boolean>(false);
-
-  const fetchAirports = async (query: string) => {
-    const response = await fetch(`/api/getAirportCodes?query=${query}`);
-    const airportData = await response.json();
-    setAirports(airportData);
-  };
-
-  React.useEffect(() => {
-    fetchAirports('');
-  }, []);
-
-  const onInputChange = async (
-    event: SyntheticEvent<Element, Event>,
-    value: string,
-  ) => {
-    event.preventDefault();
-    setOrigin(value || null);
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-    setLoading(true);
-    const newTimeout = setTimeout(() => {
-      fetchAirports(value);
-      setLoading(false);
-    }, 500);
-    setTypingTimeout(newTimeout);
-  };
 
   return (
     <Form
@@ -55,42 +24,15 @@ const FlightForm = ({ getHandleChunkSubmit }: FormProps) => {
         arrivalDate: formatDatetimeAsString(arrivalDate),
       })}
     >
-      <Autocomplete
-        id="origin-airport"
-        onInputChange={onInputChange}
-        options={airports}
+      <AirportAutocomplete
         value={origin}
-        loading={loading}
-        renderOption={(props, option) => (
-          <li {...props} key={option}>
-            {option}
-          </li>
-        )}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Origin Airport"
-            placeholder="Origin Airport"
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {loading ? (
-                    <CircularProgress color="inherit" size={20} />
-                  ) : null}
-                  {params.InputProps.endAdornment}
-                </>
-              ),
-            }}
-          />
-        )}
+        setValue={setOrigin}
+        label="Origin Airport"
       />
-      <TextField
-        type="text"
-        placeholder="Destination Airport"
-        label="Destination Airport"
+      <AirportAutocomplete
         value={destination}
-        onChange={(e) => setDestination(e.target.value)}
+        setValue={setDestination}
+        label="Destination Airport"
       />
       <DateTimePicker
         label="Departure Date"
