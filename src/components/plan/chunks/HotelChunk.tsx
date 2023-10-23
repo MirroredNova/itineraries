@@ -1,3 +1,4 @@
+import Chunk from '@/components/shared/Chunk';
 import React from 'react';
 
 type HotelChunkType = {
@@ -7,12 +8,11 @@ type HotelChunkType = {
 };
 
 const HotelChunk = ({ chunkData }: { chunkData: HotelChunkType }) => (
-  <div>
-    <h1>Hotel</h1>
+  <Chunk summaryText="Hotel">
     <p>Hotel Name: {chunkData.hotelName}</p>
     <p>Check In Date: {chunkData.checkInDate}</p>
     <p>Check Out Date: {chunkData.checkOutDate}</p>
-  </div>
+  </Chunk>
 );
 
 export default HotelChunk;

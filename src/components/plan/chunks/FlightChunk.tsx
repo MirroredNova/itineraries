@@ -1,3 +1,4 @@
+import Chunk from '@/components/shared/Chunk';
 import React from 'react';
 
 type FlightChunkType = {
@@ -8,13 +9,12 @@ type FlightChunkType = {
 };
 
 const FlightChunk = ({ chunkData }: { chunkData: FlightChunkType }) => (
-  <div>
-    <h1>Flight</h1>
+  <Chunk summaryText="Flight">
     <p>Origin: {chunkData.origin}</p>
     <p>Destination: {chunkData.destination}</p>
     <p>Departure Date: {chunkData.departureDate}</p>
     <p>Arrival Date: {chunkData.arrivalDate}</p>
-  </div>
+  </Chunk>
 );
 
 export default FlightChunk;
