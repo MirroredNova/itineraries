@@ -1,23 +1,21 @@
 import Form from '@/components/shared/Form';
-import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 import { FormProps } from '@/constants/props';
+import AirportAutocomplete from '../../inputs/AirportAutocomplete';
 
 const FORM_KEY = 'Origin Airport';
 
 const OriginAirportForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
-  const [originAirport, setOriginAirport] = useState<string>(
-    planData.configs?.find((config) => config.type === FORM_KEY)?.data || '',
+  const [originAirport, setOriginAirport] = useState<string | null>(
+    planData.configs?.find((config) => config.type === FORM_KEY)?.data || null,
   );
 
   return (
     <Form onSubmit={getHandleConfigSubmit(FORM_KEY, originAirport)}>
-      <TextField
-        type="text"
-        placeholder="Origin Airport"
-        label="Origin Airport"
+      <AirportAutocomplete
         value={originAirport}
-        onChange={(e) => setOriginAirport(e.target.value)}
+        setValue={setOriginAirport}
+        label="Origin Airport"
       />
     </Form>
   );

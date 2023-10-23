@@ -27,7 +27,6 @@ const AirportAutocomplete = ({ value, setValue, label }: Props) => {
     val: string,
   ) => {
     setLoading(true);
-    event.preventDefault();
     setValue(val || null);
     if (typingTimeout) {
       clearTimeout(typingTimeout);
@@ -44,6 +43,7 @@ const AirportAutocomplete = ({ value, setValue, label }: Props) => {
       id="origin-airport"
       onInputChange={onInputChange}
       options={airports}
+      defaultValue={value}
       value={value}
       loading={loading}
       freeSolo
