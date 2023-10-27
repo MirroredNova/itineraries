@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import { Airport } from '@/constants/airports';
+import { AirportCloud } from '@/constants/airports';
 import { prisma } from '@/initializations/prisma';
 
-export const uploadAirportData = async (data: Airport[]) => {
+export const uploadAirportData = async (data: AirportCloud[]) => {
   for (let i = 0; i < data.length; i += 1) {
     const airport = data[i];
     // eslint-disable-next-line no-await-in-loop
@@ -38,9 +38,10 @@ export const fetchAirportData = async (queryString: string) => {
     where: {
       searchString: {
         contains: queryString,
+        mode: 'insensitive',
       },
     },
-    take: 25,
+    take: 10,
     orderBy: {
       links: 'desc',
     },

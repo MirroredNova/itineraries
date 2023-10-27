@@ -1,52 +1,72 @@
-import { Autocomplete, TextField, CircularProgress } from '@mui/material';
-import React, { SyntheticEvent } from 'react';
+import { AirportLocal } from '@/constants/airports';
+import { Autocomplete, CircularProgress, TextField } from '@mui/material';
+import React, {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 type Props = {
-  value: string | null;
-  setValue: React.Dispatch<React.SetStateAction<string | null>>;
+  value: AirportLocal | null;
+  setValue: React.Dispatch<React.SetStateAction<AirportLocal | null>>;
   label: string;
 };
 
-const AirportAutocomplete = ({ value, setValue, label }: Props) => {
-  const [typingTimeout, setTypingTimeout] = React.useState<NodeJS.Timeout>();
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const [airports, setAirports] = React.useState<string[]>([]);
+const AirportAutocomplete = React.memo(({ value, setValue, label }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [airports, setAirports] = useState<AirportLocal[]>([]);
 
-  const fetchAirports = async (query: string) => {
+  const fetchAirports = useCallback(async (query: string) => {
     const response = await fetch(`/api/getAirportCodes?query=${query}`);
-    const airportData = await response.json();
+    const airportData = (await response.json()) as AirportLocal[];
     setAirports(airportData);
-  };
-
-  React.useEffect(() => {
-    fetchAirports('');
   }, []);
 
-  const onInputChange = async (
-    event: SyntheticEvent<Element, Event>,
-    val: string,
-  ) => {
-    setLoading(true);
-    setValue(val || null);
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-    const newTimeout = setTimeout(() => {
-      fetchAirports(val);
-      setLoading(false);
-    }, 500);
-    setTypingTimeout(newTimeout);
-  };
+  useEffect(() => {
+    fetchAirports('');
+  }, [fetchAirports]);
+
+  const onInputChange = useCallback(
+    async (_event: SyntheticEvent<Element, Event>, val: string) => {
+      setLoading(true);
+      if (val) {
+        const selectedAirport = airports.find(
+          (airport) => airport.searchString === val,
+        );
+        if (selectedAirport) {
+          setValue(selectedAirport);
+        }
+      } else {
+        setValue(null);
+      }
+
+      const typingTimeout = setTimeout(() => {
+        fetchAirports(val);
+        setLoading(false);
+      }, 500);
+
+      return () => {
+        clearTimeout(typingTimeout);
+      };
+    },
+    [airports, fetchAirports, setValue],
+  );
+
+  const options = useMemo(
+    () => airports.map((airport) => airport.searchString),
+    [airports],
+  );
 
   return (
     <Autocomplete
-      id="origin-airport"
-      onInputChange={onInputChange}
-      options={airports}
-      defaultValue={value}
-      value={value}
+      id={`airport-autocomplete-${label}`}
+      options={options}
+      value={value?.searchString ?? ''}
       loading={loading}
       freeSolo
+      onInputChange={onInputChange}
       forcePopupIcon={true}
       renderOption={(props, option) => (
         <li {...props} key={option}>
@@ -71,8 +91,20 @@ const AirportAutocomplete = ({ value, setValue, label }: Props) => {
           }}
         />
       )}
+      onChange={(_event, newValue) => {
+        const selectedAirport = airports.find(
+          (airport) => airport.searchString === newValue,
+        );
+        if (selectedAirport) {
+          setValue(selectedAirport);
+        } else {
+          setValue(null);
+        }
+      }}
     />
   );
-};
+});
+
+AirportAutocomplete.displayName = 'AirportAutocomplete';
 
 export default AirportAutocomplete;

@@ -1,26 +1,36 @@
 import Form from '@/components/shared/Form';
-import { FormProps } from '@/constants/props';
 import TextField from '@mui/material/TextField';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
-import React from 'react';
+import React, { FormEvent, useCallback } from 'react';
 import { formatDatetimeAsString } from '@/services/utility.services';
+import useChunkForm from '@/hooks/useChunkForm';
 
 const FORM_KEY = 'Hotel';
 
-const HotelForm = ({ getHandleChunkSubmit }: FormProps) => {
+const HotelForm = () => {
+  const { handleSubmit } = useChunkForm(FORM_KEY);
   const [hotelName, setHotelName] = React.useState<string>('');
   const [checkInDate, setCheckInDate] = React.useState<Dayjs | null>(null);
   const [checkOutDate, setCheckOutDate] = React.useState<Dayjs | null>(null);
 
-  return (
-    <Form
-      onSubmit={getHandleChunkSubmit(FORM_KEY, {
+  const handleHotelSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      handleSubmit(e, {
         hotelName,
         checkInDate: formatDatetimeAsString(checkInDate),
         checkOutDate: formatDatetimeAsString(checkOutDate),
-      })}
-    >
+      });
+      setHotelName('');
+      setCheckInDate(null);
+      setCheckOutDate(null);
+    },
+    [checkInDate, checkOutDate, handleSubmit, hotelName],
+  );
+
+  return (
+    <Form onSubmit={handleHotelSubmit}>
       <TextField
         type="text"
         placeholder="Hotel Name"

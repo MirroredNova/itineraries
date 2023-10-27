@@ -1,4 +1,4 @@
-export type Airport = {
+export type AirportCloud = {
   name: string;
   city: string;
   country: string;
@@ -10,4 +10,16 @@ export type Airport = {
   links_count: number;
   objectID: string;
   searchString?: string;
+};
+
+export type AirportLocal = {
+  iata: string;
+  name: string;
+  city: string;
+  country: string;
+  lat: number;
+  long: number;
+  links: number;
+  searchString: string;
+  createdAt: Date;
 };

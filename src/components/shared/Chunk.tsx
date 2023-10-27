@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Chunk = ({ children, summaryText }: Props) => (
-  <Accordion>
+  <Accordion className="bg-accent-light">
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
       aria-controls="panel1a-content"

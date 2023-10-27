@@ -1,4 +1,5 @@
 import Body from '@/components/plan/Body';
+import { PlanDataProvider } from '@/components/providers/PlanDataProvider';
 import React from 'react';
 
 type Props = {
@@ -9,7 +10,9 @@ type Props = {
 
 const page = async ({ params: { id } }: Props) => (
   <main className="h-screen flex justify-center">
-    <Body id={id} />
+    <PlanDataProvider id={id}>
+      <Body id={id} />
+    </PlanDataProvider>
   </main>
 );
 

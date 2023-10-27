@@ -5,6 +5,5 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const query = searchParams.get('query') || '';
   const airportData = await fetchAirportData(query);
-  const airportDataStrings = airportData.map((airport) => airport.searchString);
-  return NextResponse.json(airportDataStrings);
+  return NextResponse.json(airportData);
 }

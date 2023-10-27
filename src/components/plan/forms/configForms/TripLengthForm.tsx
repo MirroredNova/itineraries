@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useCallback, useState } from 'react';
 import Form from '@/components/shared/Form';
 import TextField from '@mui/material/TextField';
-import { FormProps } from '@/constants/props';
 import MenuItem from '@mui/material/MenuItem';
+import useConfigForm from '@/hooks/useConfigForm';
 
 const units = [
   { label: 'Days', value: 'Days' },
@@ -13,20 +13,29 @@ const units = [
 
 const FORM_KEY = 'Trip Length';
 
-const TripLengthForm = ({ planData, getHandleConfigSubmit }: FormProps) => {
+const TripLengthForm = () => {
+  const { planData, handleSubmit } = useConfigForm(FORM_KEY);
   const [unit, setUnit] = useState<string>(
-    planData.configs
+    planData?.configs
       ?.find((config) => config.type === FORM_KEY)
       ?.data.split(' - ')[0] || 'Days',
   );
   const [length, setLength] = useState(
-    planData.configs
+    planData?.configs
       ?.find((config) => config.type === FORM_KEY)
       ?.data.split(' - ')[1] || '0',
   );
 
+  const handleTripLengthSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      handleSubmit(e, `${unit} - ${length}`);
+    },
+    [handleSubmit, length, unit],
+  );
+
   return (
-    <Form onSubmit={getHandleConfigSubmit(FORM_KEY, `${unit} - ${length}`)}>
+    <Form onSubmit={handleTripLengthSubmit}>
       <TextField
         id="unit-select"
         select
