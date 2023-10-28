@@ -1,19 +1,12 @@
 'use client';
 
-import { Plan } from '@/constants/plan';
+import React, { ReactNode, createContext } from 'react';
 import usePlanData from '@/hooks/usePlanData';
-import React, { createContext } from 'react';
-
-type PlanData = {
-  planData: Plan | undefined;
-  loading: boolean;
-  id: string;
-  refreshData: () => Promise<void>;
-};
+import { PlanData } from '@/types/plan.types';
 
 type Props = {
   id: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const PlanDataContext = createContext<PlanData>({

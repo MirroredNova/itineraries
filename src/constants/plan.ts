@@ -1,19 +1,4 @@
-export type PlanConfig = {
-  type: string;
-  data: string;
-};
-
-export type PlanChunk = {
-  type: string;
-  data: object;
-};
-
-export type Plan = {
-  dateCreated: string;
-  label: string;
-  chunks: PlanChunk[];
-  configs: PlanConfig[];
-};
+import { Plan } from '@/types/plan.types';
 
 export const defaultPlan: Plan = {
   dateCreated: new Date().toISOString(),

@@ -4,12 +4,12 @@ export const formatDatetimeAsString = (date: Dayjs | null) => {
   if (!date) {
     return '';
   }
-  return date.format('YYYY-MM-DD HH:mm:ss');
+  return date.format('YYYY-MM-DD h:mm A');
 };
 
 export const parseDatetimeFromString = (date: string | undefined) => {
   if (!date) {
     return null;
   }
-  return dayjs(date, 'YYYY-MM-DD HH:mm:ss');
+  return dayjs(date, 'YYYY-MM-DD h:mm A');
 };

@@ -1,17 +1,17 @@
-import { PlanChunk, Plan } from '@/constants/plan';
+import { FormEvent, useCallback, useContext } from 'react';
 import { updatePlan } from '@/services/realtime.services';
-import { useCallback, useContext } from 'react';
 import { PlanDataContext } from '@/components/providers/PlanDataProvider';
+import { Plan, PlanChunk } from '@/types/plan.types';
 
 type UseChunkFormType = {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>, data: object) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>, data: object) => void;
 };
 
 const useChunkForm = (FORM_KEY: string): UseChunkFormType => {
   const { planData, id, refreshData } = useContext(PlanDataContext);
 
   const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>, data: object) => {
+    async (e: FormEvent<HTMLFormElement>, data: object) => {
       e.preventDefault();
       if (!planData) return;
       const newChunk: PlanChunk = {

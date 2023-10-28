@@ -1,5 +1,5 @@
-import { Plan } from '@/constants/plan';
 import app from '@/initializations/firebase';
+import { Plan } from '@/types/plan.types';
 import {
   child,
   get,

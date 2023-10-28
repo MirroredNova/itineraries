@@ -1,4 +1,4 @@
-import { AirportCloud } from '@/constants/airports';
+import { AirportCloud } from '@/types/airport.types';
 
 export const fetchAirportDataFromCloud = async () => {
   const res = await fetch(

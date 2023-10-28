@@ -1,13 +1,12 @@
-import Chunk from '@/components/shared/Chunk';
 import React from 'react';
+import Chunk from '@/components/shared/Chunk';
+import { HotelChunkType } from '@/types/chunks.types';
 
-type HotelChunkType = {
-  checkInDate: string;
-  checkOutDate: string;
-  hotelName: string;
+type Props = {
+  chunkData: HotelChunkType;
 };
 
-const HotelChunk = ({ chunkData }: { chunkData: HotelChunkType }) => (
+const HotelChunk = ({ chunkData }: Props) => (
   <Chunk summaryText="Hotel">
     <p>Hotel Name: {chunkData.hotelName}</p>
     <p>Check In Date: {chunkData.checkInDate}</p>

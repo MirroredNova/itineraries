@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import Card from '@mui/material/Card';
 import { categories } from '@/constants/forms';
 import { Divider, List } from '@mui/material';
@@ -28,13 +28,13 @@ const OptionsList = () => {
       <Card className="w-fit min-w-fit h-fit">
         <List>
           {categories.map((category, i) => (
-            <React.Fragment key={category.id}>
+            <Fragment key={category.id}>
               <OptionsListItem
                 category={category}
                 setActiveSelection={setActiveSelection}
               />
               {i < categories.length - 1 && <Divider className="my-2" />}
-            </React.Fragment>
+            </Fragment>
           ))}
         </List>
       </Card>

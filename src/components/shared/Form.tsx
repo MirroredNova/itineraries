@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button';
-import React from 'react';
+import React, { FormEvent, ReactNode } from 'react';
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
 };
 
 const Form = ({ children, className, onSubmit }: Props) => (

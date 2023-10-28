@@ -1,13 +1,13 @@
-import { Category } from '@/constants/forms';
 import { ListItemButton, ListItemText, Collapse, List } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import React from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Category } from '@/types/form.types';
 
 type Props = {
   category: Category;
-  setActiveSelection: React.Dispatch<
-    React.SetStateAction<{
+  setActiveSelection: Dispatch<
+    SetStateAction<{
       categoryId: string;
       optionId: string;
     }>
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const OptionsListItem = ({ category, setActiveSelection }: Props) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
 
   const handleClick = () => {
     setOpen(!open);

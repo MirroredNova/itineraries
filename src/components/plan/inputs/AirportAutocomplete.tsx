@@ -1,20 +1,23 @@
-import { AirportLocal } from '@/constants/airports';
-import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 import React, {
+  Dispatch,
+  SetStateAction,
   SyntheticEvent,
+  memo,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react';
+import { Autocomplete, CircularProgress, TextField } from '@mui/material';
+import { AirportLocal } from '@/types/airport.types';
 
 type Props = {
   value: AirportLocal | null;
-  setValue: React.Dispatch<React.SetStateAction<AirportLocal | null>>;
+  setValue: Dispatch<SetStateAction<AirportLocal | null>>;
   label: string;
 };
 
-const AirportAutocomplete = React.memo(({ value, setValue, label }: Props) => {
+const AirportAutocomplete = memo(({ value, setValue, label }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [airports, setAirports] = useState<AirportLocal[]>([]);
 
@@ -63,11 +66,9 @@ const AirportAutocomplete = React.memo(({ value, setValue, label }: Props) => {
     <Autocomplete
       id={`airport-autocomplete-${label}`}
       options={options}
-      value={value?.searchString ?? ''}
+      value={value?.searchString ?? null}
       loading={loading}
-      freeSolo
       onInputChange={onInputChange}
-      forcePopupIcon={true}
       renderOption={(props, option) => (
         <li {...props} key={option}>
           {option}

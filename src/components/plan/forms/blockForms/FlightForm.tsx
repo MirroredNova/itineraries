@@ -3,8 +3,8 @@ import Form from '@/components/shared/Form';
 import { formatDatetimeAsString } from '@/services/utility.services';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { Dayjs } from 'dayjs';
-import { AirportLocal } from '@/constants/airports';
 import useChunkForm from '@/hooks/useChunkForm';
+import { AirportLocal } from '@/types/airport.types';
 import AirportAutocomplete from '../../inputs/AirportAutocomplete';
 
 const FORM_KEY = 'Flight';

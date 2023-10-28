@@ -1,4 +1,4 @@
-import { Plan, PlanConfig } from '@/constants/plan';
+import { Plan, PlanConfig } from '@/types/plan.types';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
 import React from 'react';

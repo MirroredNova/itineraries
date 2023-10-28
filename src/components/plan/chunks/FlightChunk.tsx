@@ -1,33 +1,20 @@
-import Chunk from '@/components/shared/Chunk';
-import { AirportLocal } from '@/constants/airports';
 import React from 'react';
+import Chunk from '@/components/shared/Chunk';
+import { FlightChunkType } from '@/types/chunks.types';
 
-type FlightChunkType = {
-  arrivalDate: string;
-  departureDate: string;
-  destination: AirportLocal | string;
-  origin: AirportLocal | string;
+type Props = {
+  chunkData: FlightChunkType;
 };
 
-const FlightChunk = ({ chunkData }: { chunkData: FlightChunkType }) => {
-  const renderAirportInfo = (
-    label: string,
-    airport: AirportLocal | string | null,
-  ) =>
-    airport ? (
-      <p>
-        {label}: {typeof airport === 'string' ? airport : airport.searchString}
-      </p>
-    ) : null;
-
-  return (
-    <Chunk summaryText="Flight">
-      {renderAirportInfo('Origin', chunkData.origin)}
-      {renderAirportInfo('Destination', chunkData.destination)}
-      <p>Departure Date: {chunkData.departureDate}</p>
-      <p>Arrival Date: {chunkData.arrivalDate}</p>
-    </Chunk>
-  );
-};
+const FlightChunk = ({ chunkData }: Props) => (
+  <Chunk
+    summaryText={`Flight: ${chunkData.origin.iata} \u27F6 ${chunkData.destination.iata}`}
+  >
+    <p>Origin: {chunkData.origin.searchString}</p>
+    <p>Destination: {chunkData.destination.searchString}</p>
+    <p>Departure Date: {chunkData.departureDate}</p>
+    <p>Arrival Date: {chunkData.arrivalDate}</p>
+  </Chunk>
+);
 
 export default FlightChunk;

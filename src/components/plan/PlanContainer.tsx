@@ -1,9 +1,9 @@
-import { Plan } from '@/constants/plan';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import React from 'react';
 import { typeToChunkMap } from '@/constants/maps';
+import { Plan } from '@/types/plan.types';
 
 type Props = {
   plan: Plan;

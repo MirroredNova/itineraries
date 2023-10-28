@@ -1,7 +1,7 @@
 'use client';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 const theme = createTheme({
   components: {
@@ -24,7 +24,7 @@ const theme = createTheme({
 });
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const MUIProvider = ({ children }: Props) => (

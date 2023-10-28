@@ -2,19 +2,7 @@ import FlightForm from '@/components/plan/forms/blockForms/FlightForm';
 import NameForm from '@/components/plan/forms/configForms/NameForm';
 import TripLengthForm from '@/components/plan/forms/configForms/TripLengthForm';
 import HotelForm from '@/components/plan/forms/blockForms/HotelForm';
-
-export type Category = {
-  id: string;
-  headerLabel: string;
-  options: Option[];
-};
-
-export type Option = {
-  id: string;
-  type: string;
-  accordionLabel: string;
-  form?: () => React.JSX.Element;
-};
+import { Category } from '@/types/form.types';
 
 export const categories: Category[] = [
   {
@@ -37,6 +25,11 @@ export const categories: Category[] = [
         id: '2',
         type: 'Countries',
         accordionLabel: 'Countries',
+      },
+      {
+        id: '3',
+        type: 'Seasons',
+        accordionLabel: 'Seasons',
       },
     ],
   },
@@ -66,19 +59,16 @@ export const categories: Category[] = [
         id: '1',
         type: 'Day',
         accordionLabel: 'Day',
-        form: FlightForm,
       },
       {
         id: '2',
         type: 'Trip',
         accordionLabel: 'Trip',
-        form: FlightForm,
       },
       {
         id: '3',
         type: 'Group',
         accordionLabel: 'Group',
-        form: FlightForm,
       },
     ],
   },

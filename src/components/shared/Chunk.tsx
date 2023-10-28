@@ -1,3 +1,4 @@
+import React, { ReactNode } from 'react';
 import {
   Accordion,
   AccordionSummary,
@@ -5,10 +6,9 @@ import {
   AccordionDetails,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React from 'react';
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   summaryText: string;
 };
 

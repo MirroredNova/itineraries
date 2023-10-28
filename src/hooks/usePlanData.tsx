@@ -1,6 +1,6 @@
-import { Plan } from '@/constants/plan';
-import { getPlan } from '@/services/realtime.services';
 import { useState, useEffect, useCallback } from 'react';
+import { getPlan } from '@/services/realtime.services';
+import { Plan } from '@/types/plan.types';
 
 type PlanData = {
   planData: Plan | undefined;

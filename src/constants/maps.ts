@@ -1,9 +1,8 @@
 import FlightChunk from '@/components/plan/chunks/FlightChunk';
 import HotelChunk from '@/components/plan/chunks/HotelChunk';
+import { ChunkMapType } from '@/types/chunks.types';
 
-type MapType = ({ chunkData }: { chunkData: object }) => React.JSX.Element;
-
-export const typeToChunkMap = new Map<string, MapType>([
+export const typeToChunkMap = new Map<string, ChunkMapType>([
   ['Flight', FlightChunk],
   ['Hotel', HotelChunk],
-] as Array<[string, MapType]>);
+] as Array<[string, ChunkMapType]>);

@@ -1,4 +1,5 @@
 import './globals.css';
+import React, { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import MUIProvider from '@/components/providers/MUIProvider';
@@ -15,7 +16,7 @@ const inter = Inter({
 });
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export default function RootLayout({ children }: Props) {

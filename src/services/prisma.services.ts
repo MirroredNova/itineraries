@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { AirportCloud } from '@/constants/airports';
 import { prisma } from '@/initializations/prisma';
+import { AirportCloud } from '@/types/airport.types';
 
 export const uploadAirportData = async (data: AirportCloud[]) => {
   for (let i = 0; i < data.length; i += 1) {
