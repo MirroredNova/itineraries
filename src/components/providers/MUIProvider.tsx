@@ -13,6 +13,20 @@ const theme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: '#333333 !important',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#FFFFFF !important',
+        },
+      },
+    },
     MuiCard: {
       styleOverrides: {
         root: {

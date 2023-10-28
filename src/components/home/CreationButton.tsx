@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { LoadingButton } from '@mui/lab';
 
 const CreationButton = () => {
-  const { push } = useRouter();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -23,9 +23,9 @@ const CreationButton = () => {
         return;
       }
       const safeId = encodeURIComponent(newCode);
-      push(`/${safeId}`);
+      router.push(`/${safeId}`);
     },
-    [push],
+    [router],
   );
 
   return (

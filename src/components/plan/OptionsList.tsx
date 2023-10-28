@@ -13,7 +13,7 @@ const OptionsList = () => {
   const activeCategory = useMemo(
     () =>
       categories.find((category) => category.id === activeSelection.categoryId),
-    [activeSelection],
+    [activeSelection.categoryId],
   );
 
   const activeOption = useMemo(() => {
@@ -21,7 +21,7 @@ const OptionsList = () => {
     return activeCategory.options.find(
       (option) => option.id === activeSelection.optionId,
     );
-  }, [activeCategory, activeSelection]);
+  }, [activeCategory, activeSelection.optionId]);
 
   return (
     <div className="flex flex-row gap-4">

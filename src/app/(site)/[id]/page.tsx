@@ -9,11 +9,9 @@ type Props = {
 };
 
 const page = async ({ params: { id } }: Props) => (
-  <main className="h-screen flex justify-center">
-    <PlanDataProvider id={id}>
-      <Body id={id} />
-    </PlanDataProvider>
-  </main>
+  <PlanDataProvider id={id}>
+    <Body id={id} />
+  </PlanDataProvider>
 );
 
 export default page;
