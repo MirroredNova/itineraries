@@ -1,9 +1,9 @@
+import React from 'react';
 import CreationButton from '@/components/home/CreationButton';
 import Description from '@/components/home/Description';
 import ExistingButton from '@/components/home/ExistingButton';
 import { Divider, Stack } from '@mui/material';
 import Card from '@mui/material/Card';
-import React from 'react';
 
 const page = () => (
   <div className="grid gap-1 grid-cols-2 max-w-2xl">

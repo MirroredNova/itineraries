@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useCallback, useState } from 'react';
 import Form from '@/components/shared/Form';
 import TextField from '@mui/material/TextField';
 import useConfigForm from '@/hooks/useConfigForm';
@@ -11,10 +11,13 @@ const NameForm = () => {
     planData?.configs?.find((config) => config.type === FORM_KEY)?.data ?? '',
   );
 
-  const handleNameSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSubmit(e, name);
-  };
+  const handleNameSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      handleSubmit(e, name);
+    },
+    [handleSubmit, name],
+  );
 
   return (
     <Form onSubmit={handleNameSubmit}>

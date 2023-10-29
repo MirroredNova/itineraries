@@ -1,41 +1,10 @@
 'use client';
 
+import { themeMui } from '@/constants/theme';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { ReactNode } from 'react';
 
-const theme = createTheme({
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#FFB922 !important',
-          color: '#333333',
-        },
-      },
-    },
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          color: '#333333 !important',
-        },
-      },
-    },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#FFFFFF !important',
-        },
-      },
-    },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          borderRadius: '0.5rem',
-        },
-      },
-    },
-  },
-});
+const theme = createTheme(themeMui);
 
 type Props = {
   children: ReactNode;

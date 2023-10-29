@@ -1,6 +1,6 @@
+import React from 'react';
 import Body from '@/components/plan/Body';
 import { PlanDataProvider } from '@/components/providers/PlanDataProvider';
-import React from 'react';
 
 type Props = {
   params: {
