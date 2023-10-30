@@ -7,7 +7,7 @@ import {
 } from '@/services/country.services';
 import CountryAutocomplete from '../../inputs/CountryAutocomplete';
 
-const FORM_KEY = 'Country';
+const FORM_KEY = 'Countries';
 
 const CountryForm = () => {
   const { planData, handleSubmit } = useConfigForm(FORM_KEY);

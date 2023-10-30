@@ -1,4 +1,18 @@
 export const themeMui = {
+  palette: {
+    primary: {
+      main: '#1A458F',
+      light: '#3497F5',
+    },
+    secondary: {
+      main: '#333333',
+      light: '#FFFFFF',
+    },
+    accent: {
+      main: '#FFB922',
+      dark: '#D7970C',
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {

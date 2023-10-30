@@ -10,7 +10,7 @@ type Props = {
 
 const page = async ({ params: { id } }: Props) => (
   <PlanDataProvider id={id}>
-    <Body id={id} />
+    <Body />
   </PlanDataProvider>
 );
 

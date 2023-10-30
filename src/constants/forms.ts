@@ -72,6 +72,11 @@ export const categories: Category[] = [
         type: 'Group',
         accordionLabel: 'Group',
       },
+      {
+        id: '4',
+        type: 'Country',
+        accordionLabel: 'Country',
+      },
     ],
   },
 ];

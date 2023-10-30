@@ -8,11 +8,7 @@ import OptionsList from './OptionsList';
 import PlanContainer from './PlanContainer';
 import { PlanDataContext } from '../providers/PlanDataProvider';
 
-type Props = {
-  id: string;
-};
-
-const Body = ({ id }: Props) => {
+const Body = () => {
   const { planData, loading } = useContext(PlanDataContext);
 
   if (loading) {
@@ -33,7 +29,7 @@ const Body = ({ id }: Props) => {
   return (
     <div className="flex flex-row gap-4 max-w-7xl w-full justify-between p-6 pt-0">
       <div className="flex flex-col gap-4 w-1/2">
-        <Information plan={planData} id={id} />
+        <Information />
         <OptionsList />
       </div>
       <PlanContainer plan={planData} />

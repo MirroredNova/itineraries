@@ -42,3 +42,15 @@ export const getNewestPlan = async () => {
   const key = Object.keys(newestPlan)[0];
   return { key, plan: newestPlan[key] as Plan };
 };
+
+export const deleteConfig = async (planId: string, key: string) => {
+  const planRef = ref(db, `plans/${planId}`);
+  const planSnapshot = await get(planRef);
+  const plan = planSnapshot.val() as Plan;
+  if (!plan) return;
+
+  const updatedConfigs =
+    plan.configs?.filter((config) => config.type !== key) ?? [];
+
+  await set(planRef, { ...plan, configs: updatedConfigs });
+};
