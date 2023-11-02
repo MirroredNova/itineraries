@@ -32,7 +32,7 @@ const Body = () => {
         <Information />
         <OptionsList />
       </div>
-      <PlanContainer plan={planData} />
+      <PlanContainer />
     </div>
   );
 };

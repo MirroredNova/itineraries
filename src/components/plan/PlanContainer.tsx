@@ -1,18 +1,41 @@
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import React from 'react';
-import { typeToChunkMap } from '@/constants/maps';
-import { Plan } from '@/types/plan.types';
-import { Box, Divider } from '@mui/material';
+import React, { useContext } from 'react';
+// import { typeToChunkMap } from '@/constants/maps';
+import {
+  Box,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
+import { updateConfig } from '@/services/realtime.services';
+import { ClearIcon } from '@mui/x-date-pickers';
+import { PlanDataContext } from '../providers/PlanDataProvider';
 
-type Props = {
-  plan: Plan;
-};
+const PlanContainer = () => {
+  const { planData, id, refreshData } = useContext(PlanDataContext);
 
-const PlanContainer = ({ plan }: Props) => {
+  const handleAddDay = async () => {
+    if (!planData) return;
+
+    const tripLengthConfig = planData?.configs.find(
+      (config) => config.type === 'Trip Length',
+    );
+    const currentDays = parseInt(
+      tripLengthConfig?.data.split(' ')[0] ?? '0',
+      10,
+    );
+    const updatedDays = currentDays + 1;
+    await updateConfig(id, 'Trip Length', `${updatedDays} days`);
+    await refreshData();
+  };
+
   const numberOfDays = parseInt(
-    plan.configs
+    planData?.configs
       .find((config) => config.type === 'Trip Length')
       ?.data.split(' ')[0] ?? '0',
     10,
@@ -24,8 +47,13 @@ const PlanContainer = ({ plan }: Props) => {
         <h2>
           <b>Your Plan</b>
         </h2>
-        <Button variant="contained" type="submit" className="w-fit bg-primary">
-          Save
+        <Button
+          variant="contained"
+          type="submit"
+          className="w-fit bg-primary"
+          onClick={handleAddDay}
+        >
+          Add Day
         </Button>
       </CardContent>
       {/* <CardContent>
@@ -41,20 +69,29 @@ const PlanContainer = ({ plan }: Props) => {
       </CardContent> */}
       {numberOfDays > 0 && (
         <CardContent className="flex flex-col justify-around gap-2">
-          {Array.from({ length: numberOfDays }, (_, i) => i + 1).map((day) => (
-            <div key={day} className="w-full">
-              <div>Day {day}</div>
-              <Divider />
-              <Box height={40}></Box>
-            </div>
-          ))}
+          <List>
+            {Array.from({ length: numberOfDays }, (_, i) => i + 1).map(
+              (day) => (
+                <ListItem key={day} className="flex flex-col gap-1">
+                  <div className="flex flex-row w-full">
+                    <ListItemText
+                      primary={`Day ${day}`}
+                      className="flex items-center"
+                    />
+                    <ListItemIcon>
+                      <IconButton aria-label="delete">
+                        <ClearIcon />
+                      </IconButton>
+                    </ListItemIcon>
+                  </div>
+                  <Divider className="w-full" />
+                  <Box height={35}></Box>
+                </ListItem>
+              ),
+            )}
+          </List>
         </CardContent>
       )}
-      <CardContent className="flex flex-row justify-around">
-        <Button variant="contained" type="submit" className="w-fit bg-primary">
-          Add Day
-        </Button>
-      </CardContent>
     </Card>
   );
 };

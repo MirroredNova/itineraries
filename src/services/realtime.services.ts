@@ -54,3 +54,26 @@ export const deleteConfig = async (planId: string, key: string) => {
 
   await set(planRef, { ...plan, configs: updatedConfigs });
 };
+
+export const updateConfig = async (
+  planId: string,
+  key: string,
+  data: string,
+) => {
+  const planRef = ref(db, `plans/${planId}`);
+  const planSnapshot = await get(planRef);
+  const plan = planSnapshot.val() as Plan;
+  if (!plan) return;
+
+  let updatedConfigs = plan.configs?.map((config) =>
+    config.type === key ? { ...config, data } : config,
+  );
+
+  if (!updatedConfigs) {
+    updatedConfigs = [{ type: key, data }];
+  } else if (!updatedConfigs.some((config) => config.type === key)) {
+    updatedConfigs.push({ type: key, data });
+  }
+
+  await set(planRef, { ...plan, configs: updatedConfigs });
+};

@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from 'react';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import Form from '@/components/shared/Form';
 import TextField from '@mui/material/TextField';
 import useConfigForm from '@/hooks/useConfigForm';
@@ -13,6 +13,14 @@ const TripLengthForm = () => {
       ?.find((config) => config.type === FORM_KEY)
       ?.data.split(' ')[0] || '0',
   );
+
+  useEffect(() => {
+    setLength(
+      planData?.configs
+        ?.find((config) => config.type === FORM_KEY)
+        ?.data.split(' ')[0] || '0',
+    );
+  }, [planData]);
 
   const handleTripLengthSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
