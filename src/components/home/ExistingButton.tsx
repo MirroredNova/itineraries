@@ -1,6 +1,6 @@
 'use client';
 
-import { getPlan } from '@/services/realtime.services';
+import { Plan } from '@/types/plan.types';
 import { LoadingButton } from '@mui/lab';
 import { Button, TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
@@ -17,7 +17,8 @@ const ExistingButton = () => {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setLoading(true);
-      const plan = await getPlan(planCode);
+      const res = await fetch(`/api/plan/getPlan?planCode=${planCode}`);
+      const plan = (await res.json()) as Plan;
       if (!plan) {
         setPlanCode('');
         setLoading(false);

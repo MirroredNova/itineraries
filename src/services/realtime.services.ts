@@ -12,6 +12,15 @@ import {
 
 const db = getDatabase(app);
 
+export const getNewestPlan = async () => {
+  const planRef = ref(db, 'plans');
+  const latestPostRef = query(planRef, limitToLast(1));
+  const newestPlan = (await get(latestPostRef)).val();
+  if (!newestPlan) return null;
+  const key = Object.keys(newestPlan)[0];
+  return { key, plan: newestPlan[key] as Plan };
+};
+
 export const createPlan = async (planData: Plan, uniqueCode: string) => {
   const planRef = ref(db, 'plans');
   const newChildRef = child(planRef, uniqueCode);
@@ -32,15 +41,6 @@ export const updatePlan = async (planId: string, planData: Plan) => {
 export const getPlan = async (planId: string) => {
   const planRef = ref(db, `plans/${planId}`);
   return (await get(planRef)).val() as Plan;
-};
-
-export const getNewestPlan = async () => {
-  const planRef = ref(db, 'plans');
-  const latestPostRef = query(planRef, limitToLast(1));
-  const newestPlan = (await get(latestPostRef)).val();
-  if (!newestPlan) return null;
-  const key = Object.keys(newestPlan)[0];
-  return { key, plan: newestPlan[key] as Plan };
 };
 
 export const deleteConfig = async (planId: string, key: string) => {

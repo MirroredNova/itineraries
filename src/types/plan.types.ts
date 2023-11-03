@@ -8,9 +8,15 @@ export type PlanChunk = {
   data: object;
 };
 
+export type PlanDay = {
+  dayNum: string;
+  chunks: PlanChunk[];
+};
+
 export type Plan = {
   dateCreated: string;
   label: string;
+  days: PlanDay[];
   chunks: PlanChunk[];
   configs: PlanConfig[];
 };

@@ -36,7 +36,7 @@ const PlanContainer = () => {
 
   const numberOfDays = parseInt(
     planData?.configs
-      .find((config) => config.type === 'Trip Length')
+      ?.find((config) => config.type === 'Trip Length')
       ?.data.split(' ')[0] ?? '0',
     10,
   );

@@ -22,7 +22,7 @@ const AirportAutocomplete = memo(({ value, setValue, label }: Props) => {
   const [airports, setAirports] = useState<AirportLocal[]>([]);
 
   const fetchAirports = useCallback(async (query: string) => {
-    const response = await fetch(`/api/getAirportCodes?query=${query}`);
+    const response = await fetch(`/api/db/getAirportCodes?query=${query}`);
     const airportData = (await response.json()) as AirportLocal[];
     setAirports(airportData);
   }, []);

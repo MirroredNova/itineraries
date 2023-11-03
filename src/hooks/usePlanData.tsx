@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getPlan } from '@/services/realtime.services';
 import { Plan } from '@/types/plan.types';
 
 type PlanData = {
@@ -13,9 +12,10 @@ const usePlanData = (id: string): PlanData => {
   const [loading, setLoading] = useState(true);
 
   const getPlanData = useCallback(async () => {
-    const planDataRes = await getPlan(id);
-    if (planDataRes) {
-      setPlanData(planDataRes);
+    const res = await fetch(`/api/plan/getPlan?planCode=${id}`);
+    const plan = (await res.json()) as Plan;
+    if (plan) {
+      setPlanData(plan);
     }
   }, [id]);
 

@@ -11,7 +11,7 @@ const Form = ({ children, className, onSubmit }: Props) => (
   <form className={`flex flex-col gap-4 ${className}`} onSubmit={onSubmit}>
     {children}
     <Button variant="contained" type="submit" className="w-fit">
-      Add
+      Save
     </Button>
   </form>
 );

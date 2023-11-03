@@ -5,4 +5,10 @@ export const defaultPlan: Plan = {
   label: '',
   chunks: [],
   configs: [],
+  days: [
+    {
+      dayNum: 'unassigned',
+      chunks: [],
+    },
+  ],
 };
