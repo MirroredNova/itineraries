@@ -1,6 +1,6 @@
 'use client';
 
-import { Plan } from '@/types/plan.types';
+import { getPlan } from '@/services/realtime.services';
 import { LoadingButton } from '@mui/lab';
 import { Button, TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
@@ -17,8 +17,7 @@ const ExistingButton = () => {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setLoading(true);
-      const res = await fetch(`/api/plan/getPlan?planCode=${planCode}`);
-      const plan = (await res.json()) as Plan;
+      const plan = await getPlan(planCode);
       if (!plan) {
         setPlanCode('');
         setLoading(false);
@@ -29,7 +28,7 @@ const ExistingButton = () => {
         return;
       }
       const safeId = encodeURIComponent(planCode);
-      push(`/${safeId}`);
+      push(`/edit/${safeId}`);
     },
     [planCode, push],
   );

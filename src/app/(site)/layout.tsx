@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import MUIProvider from '@/components/providers/MUIProvider';
 import LocalizationProvider from '@/components/providers/LocalizationProvider';
 import Navbar from '@/components/layout/Navbar';
+import AuthProvider from '@/components/providers/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -27,10 +28,12 @@ export default function RootLayout({ children }: Props) {
       <body className="bg-primary-dark">
         <LocalizationProvider>
           <MUIProvider>
-            <Navbar />
-            <main className="mt-24 flex justify-center items-center">
-              {children}
-            </main>
+            <AuthProvider>
+              <Navbar />
+              <main className="mt-24 flex justify-center items-center">
+                {children}
+              </main>
+            </AuthProvider>
           </MUIProvider>
         </LocalizationProvider>
       </body>

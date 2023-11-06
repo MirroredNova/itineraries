@@ -1,7 +1,7 @@
 import { FormEvent, useContext } from 'react';
 import { PlanDataContext } from '@/components/providers/PlanDataProvider';
-import { updatePlan } from '@/services/realtime.services';
 import { Plan, PlanConfig } from '@/types/plan.types';
+import { updatePlan } from '@/services/realtime.services';
 
 type UseConfigFormType = {
   planData: Plan | undefined;

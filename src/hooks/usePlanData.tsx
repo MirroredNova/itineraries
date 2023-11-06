@@ -1,21 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Plan } from '@/types/plan.types';
-
-type PlanData = {
-  planData: Plan | undefined;
-  loading: boolean;
-  refreshData: () => Promise<void>;
-};
+import { Plan, PlanData } from '@/types/plan.types';
+import { getPlan } from '@/services/realtime.services';
 
 const usePlanData = (id: string): PlanData => {
   const [planData, setPlanData] = useState<Plan>();
   const [loading, setLoading] = useState(true);
 
   const getPlanData = useCallback(async () => {
-    const res = await fetch(`/api/plan/getPlan?planCode=${id}`);
-    const plan = (await res.json()) as Plan;
-    if (plan) {
-      setPlanData(plan);
+    const planDataRes = await getPlan(id);
+    if (planDataRes) {
+      setPlanData(planDataRes);
     }
   }, [id]);
 
@@ -29,7 +23,7 @@ const usePlanData = (id: string): PlanData => {
     getPlanDataAsync();
   }, [getPlanDataAsync]);
 
-  return { planData, loading, refreshData: getPlanData };
+  return { planData, setPlanData, loading, refreshData: getPlanData };
 };
 
 export default usePlanData;

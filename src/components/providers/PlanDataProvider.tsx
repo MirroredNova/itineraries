@@ -2,17 +2,18 @@
 
 import React, { ReactNode, createContext } from 'react';
 import usePlanData from '@/hooks/usePlanData';
-import { PlanData } from '@/types/plan.types';
+import { PlanDataContextType } from '@/types/plan.types';
 
 type Props = {
   id: string;
   children: ReactNode;
 };
 
-const PlanDataContext = createContext<PlanData>({
-  refreshData: async () => {},
+const PlanDataContext = createContext<PlanDataContextType>({
   planData: undefined,
+  setPlanData: async () => {},
   loading: false,
+  refreshData: async () => {},
   id: '',
 });
 

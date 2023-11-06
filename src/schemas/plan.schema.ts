@@ -3,3 +3,9 @@ export const newPlanSchema = {
   properties: {},
   required: [],
 };
+
+export const updatePlanSchema = {
+  type: 'object',
+  properties: {},
+  required: [],
+};
