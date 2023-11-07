@@ -1,29 +1,27 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import { Plan, PlanData } from '@/types/plan.types';
-import { getPlan } from '@/services/realtime.services';
+import { getDatabase, ref, onValue, off } from 'firebase/database';
+import app from '@/initializations/firebase';
 
 const usePlanData = (id: string): PlanData => {
   const [planData, setPlanData] = useState<Plan>();
   const [loading, setLoading] = useState(true);
 
-  const getPlanData = useCallback(async () => {
-    const planDataRes = await getPlan(id);
-    if (planDataRes) {
-      setPlanData(planDataRes);
-    }
+  useEffect(() => {
+    const db = getDatabase(app);
+    const planRef = ref(db, `plans/${id}`);
+
+    const handleValueChange = (snapshot: {
+      val: () => SetStateAction<Plan | undefined>;
+    }) => {
+      setPlanData(snapshot.val());
+      setLoading(false);
+    };
+    onValue(planRef, handleValueChange);
+    return () => off(planRef, 'value', handleValueChange);
   }, [id]);
 
-  const getPlanDataAsync = useCallback(async () => {
-    setLoading(true);
-    await getPlanData();
-    setLoading(false);
-  }, [getPlanData]);
-
-  useEffect(() => {
-    getPlanDataAsync();
-  }, [getPlanDataAsync]);
-
-  return { planData, setPlanData, loading, refreshData: getPlanData };
+  return { planData, loading };
 };
 
 export default usePlanData;

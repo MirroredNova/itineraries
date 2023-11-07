@@ -12,34 +12,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { updateConfig } from '@/services/realtime.services';
 import { ClearIcon } from '@mui/x-date-pickers';
 import { PlanDataContext } from '../providers/PlanDataProvider';
 
 const PlanContainer = () => {
-  const { planData, id, refreshData } = useContext(PlanDataContext);
-
-  const handleAddDay = async () => {
-    if (!planData) return;
-
-    const tripLengthConfig = planData?.configs.find(
-      (config) => config.type === 'Trip Length',
-    );
-    const currentDays = parseInt(
-      tripLengthConfig?.data.split(' ')[0] ?? '0',
-      10,
-    );
-    const updatedDays = currentDays + 1;
-    await updateConfig(id, 'Trip Length', `${updatedDays} days`);
-    await refreshData();
-  };
-
-  const numberOfDays = parseInt(
-    planData?.configs
-      ?.find((config) => config.type === 'Trip Length')
-      ?.data.split(' ')[0] ?? '0',
-    10,
-  );
+  useContext(PlanDataContext);
+  const numberOfDays = 1;
 
   return (
     <Card className="flex flex-col w-1/2 h-fit">
@@ -47,12 +25,7 @@ const PlanContainer = () => {
         <h2>
           <b>Your Plan</b>
         </h2>
-        <Button
-          variant="contained"
-          type="submit"
-          className="w-fit bg-primary"
-          onClick={handleAddDay}
-        >
+        <Button variant="contained" type="submit" className="w-fit bg-primary">
           Add Day
         </Button>
       </CardContent>

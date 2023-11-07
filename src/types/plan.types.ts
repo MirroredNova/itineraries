@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export type PlanConfig = {
   type: string;
   data: string;
@@ -26,9 +24,7 @@ export type Plan = {
 
 export type PlanData = {
   planData: Plan | undefined;
-  setPlanData: Dispatch<SetStateAction<Plan | undefined>>;
   loading: boolean;
-  refreshData: () => Promise<void>;
 };
 
 export type PlanDataContextType = PlanData & {

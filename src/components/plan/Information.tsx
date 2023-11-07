@@ -14,14 +14,13 @@ import { deleteConfig } from '@/services/realtime.services';
 import { PlanDataContext } from '../providers/PlanDataProvider';
 
 const Information = () => {
-  const { planData, id, refreshData } = useContext(PlanDataContext);
+  const { planData, id } = useContext(PlanDataContext);
 
   const handleDelete = useCallback(
     async (type: string) => {
       await deleteConfig(id, type);
-      await refreshData();
     },
-    [id, refreshData],
+    [id],
   );
 
   return (

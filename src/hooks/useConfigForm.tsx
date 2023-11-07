@@ -9,7 +9,7 @@ type UseConfigFormType = {
 };
 
 const useConfigForm = (FORM_KEY: string): UseConfigFormType => {
-  const { planData, id, refreshData } = useContext(PlanDataContext);
+  const { planData, id } = useContext(PlanDataContext);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>, data: string) => {
     e.preventDefault();
@@ -37,7 +37,6 @@ const useConfigForm = (FORM_KEY: string): UseConfigFormType => {
       }
     }
     await updatePlan(id, updatedPlanData);
-    await refreshData();
   };
 
   return { planData, handleSubmit };

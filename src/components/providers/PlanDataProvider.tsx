@@ -11,9 +11,7 @@ type Props = {
 
 const PlanDataContext = createContext<PlanDataContextType>({
   planData: undefined,
-  setPlanData: async () => {},
   loading: false,
-  refreshData: async () => {},
   id: '',
 });
 
