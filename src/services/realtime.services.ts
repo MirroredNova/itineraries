@@ -55,25 +55,22 @@ export const deleteConfig = async (planId: string, key: string) => {
   await set(planRef, { ...plan, configs: updatedConfigs });
 };
 
-export const updateConfig = async (
-  planId: string,
-  key: string,
-  data: string,
-) => {
+export const updateDays = async (planId: string, dayIndex?: number) => {
   const planRef = ref(db, `plans/${planId}`);
   const planSnapshot = await get(planRef);
   const plan = planSnapshot.val() as Plan;
   if (!plan) return;
 
-  let updatedConfigs = plan.configs?.map((config) =>
-    config.type === key ? { ...config, data } : config,
-  );
+  const updatedDays = [...(plan.days ?? [])];
 
-  if (!updatedConfigs) {
-    updatedConfigs = [{ type: key, data }];
-  } else if (!updatedConfigs.some((config) => config.type === key)) {
-    updatedConfigs.push({ type: key, data });
+  if (dayIndex !== undefined) {
+    updatedDays.splice(dayIndex, 1);
+  } else {
+    updatedDays.push({
+      dayNum: updatedDays.length,
+      chunks: [],
+    });
   }
 
-  await set(planRef, { ...plan, configs: updatedConfigs });
+  await set(planRef, { ...plan, days: updatedDays });
 };

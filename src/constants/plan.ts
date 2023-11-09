@@ -8,7 +8,7 @@ export const defaultPlan: Plan = {
   configs: [],
   days: [
     {
-      dayNum: 'unassigned',
+      dayNum: 0,
       chunks: [],
     },
   ],

@@ -8,25 +8,25 @@ type UseChunkFormType = {
 };
 
 const useChunkForm = (FORM_KEY: string): UseChunkFormType => {
-  const { planData, id } = useContext(PlanDataContext);
+  const { plan, id } = useContext(PlanDataContext);
   // instead of passing refreshData, handle update and refresh in the same API call, get the new plan databack and set it to the context.s
 
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>, data: object) => {
       e.preventDefault();
-      if (!planData) return;
+      if (!plan) return;
       const newChunk: PlanChunk = {
         type: FORM_KEY,
         data,
       };
       const updatedPlanData: Plan = {
-        ...planData,
+        ...plan,
       };
-      updatedPlanData.chunks = updatedPlanData.chunks || [];
-      updatedPlanData.chunks.push(newChunk);
+      updatedPlanData.days[0].chunks = updatedPlanData.days[0].chunks || [];
+      updatedPlanData.days[0].chunks.push(newChunk);
       await updatePlan(id, updatedPlanData);
     },
-    [FORM_KEY, id, planData],
+    [FORM_KEY, id, plan],
   );
 
   return { handleSubmit };

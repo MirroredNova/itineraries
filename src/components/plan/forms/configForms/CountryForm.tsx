@@ -10,10 +10,10 @@ import CountryAutocomplete from '../../inputs/CountryAutocomplete';
 const FORM_KEY = 'Countries';
 
 const CountryForm = () => {
-  const { planData, handleSubmit } = useConfigForm(FORM_KEY);
+  const { plan, handleSubmit } = useConfigForm(FORM_KEY);
   const [countries, setCountries] = useState<string[]>(() =>
     countryStringToArray(
-      planData?.configs?.find((config) => config.type === FORM_KEY)?.data ?? '',
+      plan?.configs?.find((config) => config.type === FORM_KEY)?.data ?? '',
     ),
   );
 

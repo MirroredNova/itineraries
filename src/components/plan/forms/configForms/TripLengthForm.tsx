@@ -7,20 +7,20 @@ import { InputAdornment } from '@mui/material';
 const FORM_KEY = 'Trip Length';
 
 const TripLengthForm = () => {
-  const { planData, handleSubmit } = useConfigForm(FORM_KEY);
+  const { plan, handleSubmit } = useConfigForm(FORM_KEY);
   const [length, setLength] = useState(
-    planData?.configs
+    plan?.configs
       ?.find((config) => config.type === FORM_KEY)
       ?.data.split(' ')[0] || '0',
   );
 
   useEffect(() => {
     setLength(
-      planData?.configs
+      plan?.configs
         ?.find((config) => config.type === FORM_KEY)
         ?.data.split(' ')[0] || '0',
     );
-  }, [planData]);
+  }, [plan]);
 
   const handleTripLengthSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {

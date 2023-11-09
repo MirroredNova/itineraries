@@ -9,7 +9,7 @@ export type PlanChunk = {
 };
 
 export type PlanDay = {
-  dayNum: string;
+  dayNum: number;
   chunks: PlanChunk[];
 };
 
@@ -23,7 +23,7 @@ export type Plan = {
 };
 
 export type PlanData = {
-  planData: Plan | undefined;
+  plan: Plan | undefined;
   loading: boolean;
 };
 

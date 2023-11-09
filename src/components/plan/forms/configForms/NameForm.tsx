@@ -6,9 +6,9 @@ import useConfigForm from '@/hooks/useConfigForm';
 const FORM_KEY = 'Name';
 
 const NameForm = () => {
-  const { planData, handleSubmit } = useConfigForm(FORM_KEY);
+  const { plan, handleSubmit } = useConfigForm(FORM_KEY);
   const [name, setName] = useState<string>(
-    planData?.configs?.find((config) => config.type === FORM_KEY)?.data ?? '',
+    plan?.configs?.find((config) => config.type === FORM_KEY)?.data ?? '',
   );
 
   const handleNameSubmit = useCallback(

@@ -9,7 +9,7 @@ import PlanContainer from './PlanContainer';
 import { PlanDataContext } from '../providers/PlanDataProvider';
 
 const Body = () => {
-  const { planData, loading } = useContext(PlanDataContext);
+  const { plan, loading } = useContext(PlanDataContext);
 
   if (loading) {
     return (
@@ -20,7 +20,7 @@ const Body = () => {
     );
   }
 
-  if (!planData) {
+  if (!plan) {
     return (
       <Card className="text-5xl p-12 font-medium h-fit">Plan not found</Card>
     );

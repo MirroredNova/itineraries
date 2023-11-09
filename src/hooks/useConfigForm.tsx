@@ -4,19 +4,19 @@ import { Plan, PlanConfig } from '@/types/plan.types';
 import { updatePlan } from '@/services/realtime.services';
 
 type UseConfigFormType = {
-  planData: Plan | undefined;
+  plan: Plan | undefined;
   handleSubmit: (e: FormEvent<HTMLFormElement>, data: string) => void;
 };
 
 const useConfigForm = (FORM_KEY: string): UseConfigFormType => {
-  const { planData, id } = useContext(PlanDataContext);
+  const { plan, id } = useContext(PlanDataContext);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>, data: string) => {
     e.preventDefault();
-    if (!planData) return;
+    if (!plan) return;
     const updatedPlanData: Plan = {
-      ...planData,
-      configs: planData.configs?.slice() ?? [],
+      ...plan,
+      configs: plan.configs?.slice() ?? [],
     };
     if (data === '') {
       updatedPlanData.configs = updatedPlanData.configs.filter(
@@ -39,7 +39,7 @@ const useConfigForm = (FORM_KEY: string): UseConfigFormType => {
     await updatePlan(id, updatedPlanData);
   };
 
-  return { planData, handleSubmit };
+  return { plan, handleSubmit };
 };
 
 export default useConfigForm;

@@ -14,11 +14,11 @@ import { deleteConfig } from '@/services/realtime.services';
 import { PlanDataContext } from '../providers/PlanDataProvider';
 
 const Information = () => {
-  const { planData, id } = useContext(PlanDataContext);
+  const { plan, id } = useContext(PlanDataContext);
 
   const handleDelete = useCallback(
-    async (type: string) => {
-      await deleteConfig(id, type);
+    async (key: string) => {
+      await deleteConfig(id, key);
     },
     [id],
   );
@@ -30,8 +30,8 @@ const Information = () => {
       </h2>
       <Divider className="my-2" />
       <List>
-        {planData?.configs &&
-          planData.configs.map((config: PlanConfig) => (
+        {plan?.configs &&
+          plan.configs.map((config: PlanConfig) => (
             <ListItem
               key={config.type}
               data-configtype={config.type}

@@ -10,7 +10,7 @@ type Props = {
 };
 
 const PlanDataContext = createContext<PlanDataContextType>({
-  planData: undefined,
+  plan: undefined,
   loading: false,
   id: '',
 });
