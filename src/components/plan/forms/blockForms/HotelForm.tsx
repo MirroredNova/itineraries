@@ -8,7 +8,7 @@ import { HotelChunkType } from '@/types/chunks.types';
 import DayTimeInput from '../../inputs/DayTimeInput';
 
 const FORM_KEY = 'Hotel';
-const FORM_TYPE = 'split';
+// const FORM_TYPE = 'split';
 
 const HotelForm = () => {
   const { handleSubmit } = useChunkForm<HotelChunkType>(FORM_KEY);
