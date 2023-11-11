@@ -3,14 +3,14 @@ import { AirportLocal } from './airport.types';
 export type ChunkMapType = (props: { chunkData: object }) => React.JSX.Element;
 
 export type HotelChunkType = {
-  checkInDate: string;
-  checkOutDate: string;
+  checkInTime: string;
+  checkOutTime: string;
   hotelName: string;
 };
 
 export type FlightChunkType = {
-  arrivalDate: string;
-  departureDate: string;
+  arrivalTime: string;
+  departureTime: string;
   destination: AirportLocal;
   origin: AirportLocal;
 };

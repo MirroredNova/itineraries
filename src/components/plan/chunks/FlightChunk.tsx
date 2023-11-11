@@ -12,8 +12,8 @@ const FlightChunk = ({ chunkData }: Props) => (
   >
     <p>Origin: {chunkData.origin.searchString}</p>
     <p>Destination: {chunkData.destination.searchString}</p>
-    <p>Departure Date: {chunkData.departureDate}</p>
-    <p>Arrival Date: {chunkData.arrivalDate}</p>
+    <p>Departure Time: {chunkData.departureTime}</p>
+    <p>Arrival Time: {chunkData.arrivalTime}</p>
   </Chunk>
 );
 

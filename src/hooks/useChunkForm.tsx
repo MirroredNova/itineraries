@@ -3,16 +3,17 @@ import { PlanDataContext } from '@/components/providers/PlanDataProvider';
 import { Plan, PlanChunk } from '@/types/plan.types';
 import { updatePlan } from '@/services/realtime.services';
 
-type UseChunkFormType = {
-  handleSubmit: (e: FormEvent<HTMLFormElement>, data: object) => void;
+type UseChunkFormType<T> = {
+  handleSubmit: (e: FormEvent<HTMLFormElement>, data: T) => void;
 };
 
-const useChunkForm = (FORM_KEY: string): UseChunkFormType => {
+const useChunkForm = <T extends object>(
+  FORM_KEY: string,
+): UseChunkFormType<T> => {
   const { plan, id } = useContext(PlanDataContext);
-  // instead of passing refreshData, handle update and refresh in the same API call, get the new plan databack and set it to the context.s
 
   const handleSubmit = useCallback(
-    async (e: FormEvent<HTMLFormElement>, data: object) => {
+    async (e: FormEvent<HTMLFormElement>, data: T) => {
       e.preventDefault();
       if (!plan) return;
       const newChunk: PlanChunk = {

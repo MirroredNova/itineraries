@@ -1,32 +1,36 @@
 import Form from '@/components/shared/Form';
 import TextField from '@mui/material/TextField';
-import { DateTimePicker } from '@mui/x-date-pickers';
-import { Dayjs } from 'dayjs';
 import React, { FormEvent, useCallback, useState } from 'react';
-import { formatDatetimeAsString } from '@/services/utility.services';
 import useChunkForm from '@/hooks/useChunkForm';
+import { Dayjs } from 'dayjs';
+import { formatDatetimeAsTimeString } from '@/services/dayjs.services';
+import { HotelChunkType } from '@/types/chunks.types';
+import DayTimeInput from '../../inputs/DayTimeInput';
 
 const FORM_KEY = 'Hotel';
+const FORM_TYPE = 'split';
 
 const HotelForm = () => {
-  const { handleSubmit } = useChunkForm(FORM_KEY);
+  const { handleSubmit } = useChunkForm<HotelChunkType>(FORM_KEY);
   const [hotelName, setHotelName] = useState<string>('');
-  const [checkInDate, setCheckInDate] = useState<Dayjs | null>(null);
-  const [checkOutDate, setCheckOutDate] = useState<Dayjs | null>(null);
+  const [checkInDay, setCheckInDay] = useState<number>(0);
+  const [checkOutDay, setCheckOutDay] = useState<number>(0);
+  const [checkInTime, setCheckInTime] = React.useState<Dayjs | null>(null);
+  const [checkOutTime, setCheckOutTime] = React.useState<Dayjs | null>(null);
 
   const handleHotelSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       handleSubmit(e, {
         hotelName,
-        checkInDate: formatDatetimeAsString(checkInDate),
-        checkOutDate: formatDatetimeAsString(checkOutDate),
+        checkInTime: formatDatetimeAsTimeString(checkInTime),
+        checkOutTime: formatDatetimeAsTimeString(checkOutTime),
       });
       setHotelName('');
-      setCheckInDate(null);
-      setCheckOutDate(null);
+      setCheckInTime(null);
+      setCheckOutTime(null);
     },
-    [checkInDate, checkOutDate, handleSubmit, hotelName],
+    [checkInTime, checkOutTime, handleSubmit, hotelName],
   );
 
   return (
@@ -38,15 +42,21 @@ const HotelForm = () => {
         value={hotelName}
         onChange={(e) => setHotelName(e.target.value)}
       />
-      <DateTimePicker
-        label="Check In Date"
-        value={checkInDate}
-        onChange={(newValue) => setCheckInDate(newValue)}
+      <DayTimeInput
+        checkInDay={checkInDay}
+        setCheckInDay={setCheckInDay}
+        checkInTime={checkInTime}
+        setCheckInTime={setCheckInTime}
+        dayLabel={'Check In Day'}
+        timeLabel={'Check In Time'}
       />
-      <DateTimePicker
-        label="Check Out Date"
-        value={checkOutDate}
-        onChange={(newValue) => setCheckOutDate(newValue)}
+      <DayTimeInput
+        checkInDay={checkOutDay}
+        setCheckInDay={setCheckOutDay}
+        checkInTime={checkOutTime}
+        setCheckInTime={setCheckOutTime}
+        dayLabel={'Check Out Day'}
+        timeLabel={'Check Out Time'}
       />
     </Form>
   );

@@ -1,16 +1,17 @@
 import React, { FormEvent, useCallback, useState } from 'react';
 import Form from '@/components/shared/Form';
-import { formatDatetimeAsString } from '@/services/utility.services';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { formatDatetimeAsTimeString } from '@/services/dayjs.services';
 import { Dayjs } from 'dayjs';
 import useChunkForm from '@/hooks/useChunkForm';
 import { AirportLocal } from '@/types/airport.types';
+import { FlightChunkType } from '@/types/chunks.types';
+import { TimePicker } from '@mui/x-date-pickers';
 import AirportAutocomplete from '../../inputs/AirportAutocomplete';
 
 const FORM_KEY = 'Flight';
 
 const FlightForm = () => {
-  const { handleSubmit } = useChunkForm(FORM_KEY);
+  const { handleSubmit } = useChunkForm<FlightChunkType>(FORM_KEY);
   const [origin, setOrigin] = useState<null | AirportLocal>(null);
   const [destination, setDestination] = useState<null | AirportLocal>(null);
   const [departureDate, setDepartureDate] = useState<Dayjs | null>(null);
@@ -20,10 +21,10 @@ const FlightForm = () => {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       handleSubmit(e, {
-        origin,
-        destination,
-        departureDate: formatDatetimeAsString(departureDate),
-        arrivalDate: formatDatetimeAsString(arrivalDate),
+        origin: origin!,
+        destination: destination!,
+        departureTime: formatDatetimeAsTimeString(departureDate!),
+        arrivalTime: formatDatetimeAsTimeString(arrivalDate!),
       });
       setOrigin(null);
       setDestination(null);
@@ -45,15 +46,19 @@ const FlightForm = () => {
         setValue={setDestination}
         label="Destination Airport"
       />
-      <DateTimePicker
-        label="Departure Date"
+      <TimePicker
+        label="Departure Time"
         value={departureDate}
-        onChange={(newValue) => setDepartureDate(newValue)}
+        onChange={(newValue) => {
+          setDepartureDate(newValue);
+        }}
       />
-      <DateTimePicker
-        label="Arrival Date"
+      <TimePicker
+        label="Arrival Time"
         value={arrivalDate}
-        onChange={(newValue) => setArrivalDate(newValue)}
+        onChange={(newValue) => {
+          setArrivalDate(newValue);
+        }}
       />
     </Form>
   );
