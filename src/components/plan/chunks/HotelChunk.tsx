@@ -9,8 +9,8 @@ type Props = {
 const HotelChunk = ({ chunkData }: Props) => (
   <Chunk summaryText={`Hotel: ${chunkData.hotelName}`}>
     <p>Hotel Name: {chunkData.hotelName}</p>
-    <p>Check In Time: {chunkData.checkInTime}</p>
-    <p>Check Out Time: {chunkData.checkOutTime}</p>
+    <p>Check In Time: {chunkData.dayFields.checkIn.time}</p>
+    <p>Check Out Time: {chunkData.dayFields.checkOut.time}</p>
   </Chunk>
 );
 

@@ -4,19 +4,19 @@ import { Dayjs } from 'dayjs';
 import React from 'react';
 
 type Props = {
-  checkInDay: number;
-  setCheckInDay: (value: number) => void;
-  checkInTime: Dayjs | null;
-  setCheckInTime: (value: Dayjs | null) => void;
+  day: number;
+  setDay: (value: number) => void;
+  time: Dayjs | null;
+  setTime: (value: Dayjs | null) => void;
   dayLabel: string;
   timeLabel: string;
 };
 
 const DayTimeInput = ({
-  checkInDay,
-  setCheckInDay,
-  checkInTime,
-  setCheckInTime,
+  day,
+  setDay,
+  time,
+  setTime,
   dayLabel,
   timeLabel,
 }: Props) => (
@@ -25,13 +25,13 @@ const DayTimeInput = ({
       label={dayLabel}
       type="number"
       placeholder={dayLabel}
-      value={checkInDay}
-      onChange={(e) => setCheckInDay(Number(e.target.value))}
+      value={day}
+      onChange={(e) => setDay(Number(e.target.value))}
     />
     <TimePicker
       label={timeLabel}
-      value={checkInTime}
-      onChange={(newValue) => setCheckInTime(newValue)}
+      value={time}
+      onChange={(newValue) => setTime(newValue)}
     />
   </Stack>
 );

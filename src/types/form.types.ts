@@ -4,9 +4,11 @@ export type Category = {
   options: Option[];
 };
 
-type Option = {
+export type Option = {
   id: string;
   type: string;
   accordionLabel: string;
   form?: () => React.JSX.Element;
 };
+
+export type FormTypes = 'split' | 'standard';

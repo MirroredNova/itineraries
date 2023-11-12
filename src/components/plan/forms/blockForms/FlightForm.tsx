@@ -5,17 +5,21 @@ import { Dayjs } from 'dayjs';
 import useChunkForm from '@/hooks/useChunkForm';
 import { AirportLocal } from '@/types/airport.types';
 import { FlightChunkType } from '@/types/chunks.types';
-import { TimePicker } from '@mui/x-date-pickers';
+import { FormTypes } from '@/types/form.types';
 import AirportAutocomplete from '../../inputs/AirportAutocomplete';
+import DayTimeInput from '../../inputs/DayTimeInput';
 
 const FORM_KEY = 'Flight';
+const FORM_TYPE: FormTypes = 'standard';
 
 const FlightForm = () => {
-  const { handleSubmit } = useChunkForm<FlightChunkType>(FORM_KEY);
+  const { handleSubmit } = useChunkForm<FlightChunkType>(FORM_KEY, FORM_TYPE);
   const [origin, setOrigin] = useState<null | AirportLocal>(null);
   const [destination, setDestination] = useState<null | AirportLocal>(null);
-  const [departureDate, setDepartureDate] = useState<Dayjs | null>(null);
-  const [arrivalDate, setArrivalDate] = useState<Dayjs | null>(null);
+  const [departureDay, setDepartureDay] = useState<number>(0);
+  const [departureTime, setDepartureTime] = useState<Dayjs | null>(null);
+  const [arrivalDay, setArrivalDay] = useState<number>(0);
+  const [arrivalTime, setArrivalTime] = useState<Dayjs | null>(null);
 
   const handleFlightSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -23,15 +27,34 @@ const FlightForm = () => {
       handleSubmit(e, {
         origin: origin!,
         destination: destination!,
-        departureTime: formatDatetimeAsTimeString(departureDate!),
-        arrivalTime: formatDatetimeAsTimeString(arrivalDate!),
+        dayFields: {
+          departure: {
+            day: departureDay,
+            time: formatDatetimeAsTimeString(departureTime),
+          },
+          arrival: {
+            day: arrivalDay,
+            time: formatDatetimeAsTimeString(arrivalTime),
+          },
+        },
       });
+
       setOrigin(null);
       setDestination(null);
-      setDepartureDate(null);
-      setArrivalDate(null);
+      setDepartureDay(0);
+      setDepartureTime(null);
+      setArrivalDay(0);
+      setArrivalTime(null);
     },
-    [arrivalDate, departureDate, destination, handleSubmit, origin],
+    [
+      arrivalDay,
+      arrivalTime,
+      departureDay,
+      departureTime,
+      destination,
+      handleSubmit,
+      origin,
+    ],
   );
 
   return (
@@ -46,19 +69,21 @@ const FlightForm = () => {
         setValue={setDestination}
         label="Destination Airport"
       />
-      <TimePicker
-        label="Departure Time"
-        value={departureDate}
-        onChange={(newValue) => {
-          setDepartureDate(newValue);
-        }}
+      <DayTimeInput
+        timeLabel="Departure Time"
+        day={departureDay}
+        setDay={setDepartureDay}
+        time={departureTime}
+        setTime={setDepartureTime}
+        dayLabel="Departure Day"
       />
-      <TimePicker
-        label="Arrival Time"
-        value={arrivalDate}
-        onChange={(newValue) => {
-          setArrivalDate(newValue);
-        }}
+      <DayTimeInput
+        timeLabel="Arrival Time"
+        day={arrivalDay}
+        setDay={setArrivalDay}
+        time={arrivalTime}
+        setTime={setArrivalTime}
+        dayLabel="Arrival Day"
       />
     </Form>
   );

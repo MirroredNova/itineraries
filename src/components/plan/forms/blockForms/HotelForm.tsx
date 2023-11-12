@@ -5,13 +5,14 @@ import useChunkForm from '@/hooks/useChunkForm';
 import { Dayjs } from 'dayjs';
 import { formatDatetimeAsTimeString } from '@/services/dayjs.services';
 import { HotelChunkType } from '@/types/chunks.types';
+import { FormTypes } from '@/types/form.types';
 import DayTimeInput from '../../inputs/DayTimeInput';
 
 const FORM_KEY = 'Hotel';
-// const FORM_TYPE = 'split';
+const FORM_TYPE: FormTypes = 'split';
 
 const HotelForm = () => {
-  const { handleSubmit } = useChunkForm<HotelChunkType>(FORM_KEY);
+  const { handleSubmit } = useChunkForm<HotelChunkType>(FORM_KEY, FORM_TYPE);
   const [hotelName, setHotelName] = useState<string>('');
   const [checkInDay, setCheckInDay] = useState<number>(0);
   const [checkOutDay, setCheckOutDay] = useState<number>(0);
@@ -23,14 +24,31 @@ const HotelForm = () => {
       e.preventDefault();
       handleSubmit(e, {
         hotelName,
-        checkInTime: formatDatetimeAsTimeString(checkInTime),
-        checkOutTime: formatDatetimeAsTimeString(checkOutTime),
+        dayFields: {
+          checkIn: {
+            day: checkInDay,
+            time: formatDatetimeAsTimeString(checkInTime),
+          },
+          checkOut: {
+            day: checkOutDay,
+            time: formatDatetimeAsTimeString(checkOutTime),
+          },
+        },
       });
       setHotelName('');
       setCheckInTime(null);
+      setCheckInDay(0);
       setCheckOutTime(null);
+      setCheckOutDay(0);
     },
-    [checkInTime, checkOutTime, handleSubmit, hotelName],
+    [
+      checkInDay,
+      checkInTime,
+      checkOutDay,
+      checkOutTime,
+      handleSubmit,
+      hotelName,
+    ],
   );
 
   return (
@@ -43,18 +61,18 @@ const HotelForm = () => {
         onChange={(e) => setHotelName(e.target.value)}
       />
       <DayTimeInput
-        checkInDay={checkInDay}
-        setCheckInDay={setCheckInDay}
-        checkInTime={checkInTime}
-        setCheckInTime={setCheckInTime}
+        day={checkInDay}
+        setDay={setCheckInDay}
+        time={checkInTime}
+        setTime={setCheckInTime}
         dayLabel={'Check In Day'}
         timeLabel={'Check In Time'}
       />
       <DayTimeInput
-        checkInDay={checkOutDay}
-        setCheckInDay={setCheckOutDay}
-        checkInTime={checkOutTime}
-        setCheckInTime={setCheckOutTime}
+        day={checkOutDay}
+        setDay={setCheckOutDay}
+        time={checkOutTime}
+        setTime={setCheckOutTime}
         dayLabel={'Check Out Day'}
         timeLabel={'Check Out Time'}
       />
