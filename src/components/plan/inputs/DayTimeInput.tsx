@@ -10,6 +10,8 @@ type Props = {
   setTime: (value: Dayjs | null) => void;
   dayLabel: string;
   timeLabel: string;
+  dayRequired?: boolean;
+  timeRequired?: boolean;
 };
 
 const DayTimeInput = ({
@@ -19,6 +21,8 @@ const DayTimeInput = ({
   setTime,
   dayLabel,
   timeLabel,
+  dayRequired = false,
+  timeRequired = false,
 }: Props) => (
   <Stack spacing={2} direction="row">
     <TextField
@@ -26,12 +30,23 @@ const DayTimeInput = ({
       type="number"
       placeholder={dayLabel}
       value={day}
+      required={dayRequired}
       onChange={(e) => setDay(Number(e.target.value))}
+      InputProps={{
+        inputProps: {
+          min: 0,
+        },
+      }}
     />
     <TimePicker
       label={timeLabel}
       value={time}
       onChange={(newValue) => setTime(newValue)}
+      slotProps={{
+        textField: {
+          required: timeRequired,
+        },
+      }}
     />
   </Stack>
 );

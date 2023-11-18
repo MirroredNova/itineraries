@@ -32,7 +32,7 @@ const PlanContainer = () => {
 
   const renderDayText = useCallback((index: number) => {
     if (index === 0) {
-      return 'Unassigned Items';
+      return 'Day 0: Unassigned Items';
     }
     return `Day ${index}`;
   }, []);

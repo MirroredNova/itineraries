@@ -14,28 +14,36 @@ const useChunkForm = <T extends object>(
 ): UseChunkFormType<T> => {
   const { plan, id } = useContext(PlanDataContext);
 
+  // standard form type should create a single chunk where each dayfield is a property of that chunk
+  // split form type should create a chunk for each dayfield
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>, data: T) => {
       e.preventDefault();
       if (!plan) return;
 
-      switch (FORM_TYPE) {
-        case 'split':
-          break;
-        case 'standard':
-          break;
-        default:
-          break;
-      }
-      const newChunk: PlanChunk = {
-        type: FORM_KEY,
-        data,
-      };
       const updatedPlanData: Plan = {
         ...plan,
       };
-      updatedPlanData.days[0].chunks = updatedPlanData.days[0].chunks || [];
-      updatedPlanData.days[0].chunks.push(newChunk);
+
+      switch (FORM_TYPE) {
+        case 'split': {
+          break;
+        }
+
+        case 'standard': {
+          const newChunk: PlanChunk = {
+            type: FORM_KEY,
+            data,
+          };
+
+          updatedPlanData.days[0].chunks = updatedPlanData.days[0].chunks || [];
+          updatedPlanData.days[0].chunks.push(newChunk);
+          break;
+        }
+        default:
+          break;
+      }
+
       await updatePlan(id, updatedPlanData);
     },
     [FORM_KEY, FORM_TYPE, id, plan],

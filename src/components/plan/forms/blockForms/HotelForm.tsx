@@ -16,8 +16,16 @@ const HotelForm = () => {
   const [hotelName, setHotelName] = useState<string>('');
   const [checkInDay, setCheckInDay] = useState<number>(0);
   const [checkOutDay, setCheckOutDay] = useState<number>(0);
-  const [checkInTime, setCheckInTime] = React.useState<Dayjs | null>(null);
-  const [checkOutTime, setCheckOutTime] = React.useState<Dayjs | null>(null);
+  const [checkInTime, setCheckInTime] = useState<Dayjs | null>(null);
+  const [checkOutTime, setCheckOutTime] = useState<Dayjs | null>(null);
+
+  const resetState = useCallback(() => {
+    setHotelName('');
+    setCheckInDay(0);
+    setCheckInTime(null);
+    setCheckOutDay(0);
+    setCheckOutTime(null);
+  }, []);
 
   const handleHotelSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -35,11 +43,7 @@ const HotelForm = () => {
           },
         },
       });
-      setHotelName('');
-      setCheckInTime(null);
-      setCheckInDay(0);
-      setCheckOutTime(null);
-      setCheckOutDay(0);
+      resetState();
     },
     [
       checkInDay,
@@ -48,6 +52,7 @@ const HotelForm = () => {
       checkOutTime,
       handleSubmit,
       hotelName,
+      resetState,
     ],
   );
 
@@ -58,6 +63,7 @@ const HotelForm = () => {
         placeholder="Hotel Name"
         label="Hotel Name"
         value={hotelName}
+        required
         onChange={(e) => setHotelName(e.target.value)}
       />
       <DayTimeInput
@@ -67,6 +73,8 @@ const HotelForm = () => {
         setTime={setCheckInTime}
         dayLabel={'Check In Day'}
         timeLabel={'Check In Time'}
+        dayRequired
+        timeRequired
       />
       <DayTimeInput
         day={checkOutDay}
@@ -75,6 +83,8 @@ const HotelForm = () => {
         setTime={setCheckOutTime}
         dayLabel={'Check Out Day'}
         timeLabel={'Check Out Time'}
+        dayRequired
+        timeRequired
       />
     </Form>
   );

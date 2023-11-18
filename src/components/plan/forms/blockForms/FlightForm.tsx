@@ -63,11 +63,13 @@ const FlightForm = () => {
         value={origin}
         setValue={setOrigin}
         label="Origin Airport"
+        required
       />
       <AirportAutocomplete
         value={destination}
         setValue={setDestination}
         label="Destination Airport"
+        required
       />
       <DayTimeInput
         timeLabel="Departure Time"
@@ -76,6 +78,8 @@ const FlightForm = () => {
         time={departureTime}
         setTime={setDepartureTime}
         dayLabel="Departure Day"
+        dayRequired
+        timeRequired
       />
       <DayTimeInput
         timeLabel="Arrival Time"
@@ -84,6 +88,8 @@ const FlightForm = () => {
         time={arrivalTime}
         setTime={setArrivalTime}
         dayLabel="Arrival Day"
+        dayRequired
+        timeRequired
       />
     </Form>
   );

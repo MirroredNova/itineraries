@@ -26,7 +26,7 @@ const Navbar = () => (
               fontWeight: 700,
             }}
           >
-            This site is a work in progress
+            This site is a work in progress and not mobile friendly yet.
           </Typography>
         </Toolbar>
       </Container>
