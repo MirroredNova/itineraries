@@ -27,16 +27,18 @@ const FlightForm = () => {
       handleSubmit(e, {
         origin: origin!,
         destination: destination!,
-        dayFields: {
-          departure: {
+        dayFields: [
+          {
+            label: 'departure',
             day: departureDay,
             time: formatDatetimeAsTimeString(departureTime),
           },
-          arrival: {
+          {
+            label: 'arrival',
             day: arrivalDay,
             time: formatDatetimeAsTimeString(arrivalTime),
           },
-        },
+        ],
       });
 
       setOrigin(null);

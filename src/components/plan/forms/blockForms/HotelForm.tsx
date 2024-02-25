@@ -32,16 +32,18 @@ const HotelForm = () => {
       e.preventDefault();
       handleSubmit(e, {
         hotelName,
-        dayFields: {
-          checkIn: {
+        dayFields: [
+          {
+            label: 'checkIn',
             day: checkInDay,
             time: formatDatetimeAsTimeString(checkInTime),
           },
-          checkOut: {
+          {
+            label: 'checkOut',
             day: checkOutDay,
             time: formatDatetimeAsTimeString(checkOutTime),
           },
-        },
+        ],
       });
       resetState();
     },

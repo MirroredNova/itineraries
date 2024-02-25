@@ -74,3 +74,35 @@ export const updateDays = async (planId: string, dayIndex?: number) => {
 
   await set(planRef, { ...plan, days: updatedDays });
 };
+
+/**
+ * Makes sure that, give a number, there are total number of days is that number.
+ * Ex. if there are currently 4 days in the plan, and the number passed to this function is 7, then 3 days will be added to the plan.
+ */
+export const addDaysUpto = async (planId: string, numDays: number) => {
+  const planRef = ref(db, `plans/${planId}`);
+  const planSnapshot = await get(planRef);
+  const plan = planSnapshot.val() as Plan;
+  if (!plan) return;
+
+  const updatedDays = [...(plan.days ?? [])];
+
+  for (let i = 0; i < numDays; i += 1) {
+    updatedDays.push({
+      dayNum: updatedDays.length,
+      chunks: [],
+    });
+  }
+
+  await set(planRef, { ...plan, days: updatedDays });
+};
+
+export const dayExists = async (planId: string, dayNum: number) => {
+  const planRef = ref(db, `plans/${planId}`);
+  const planSnapshot = await get(planRef);
+  const plan = planSnapshot.val() as Plan;
+  if (!plan) return false;
+
+  const day = plan.days?.find((d) => d.dayNum === dayNum);
+  return !!day;
+};
