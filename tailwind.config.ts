@@ -6,7 +6,6 @@ export default {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  important: '#__next',
   theme: {
     fontFamily: {
       sans: ['var(--font-roboto)', 'ui-sans-serif', 'system-ui'],
@@ -19,7 +18,4 @@ export default {
     },
   },
   plugins: [],
-  corePlugins: {
-    preflight: false,
-  },
 } satisfies Config;
