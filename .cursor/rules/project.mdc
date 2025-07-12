@@ -1,0 +1,31 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# About
+
+This project is a web application that allows users to create and manage their vacation itineraries. It is a side project for me but it is a real project with real users and real data and should be treated as such. The goal of this project is to create an app that lets users create itineraries not in the traditional sense, but in a more flexible and generalizable way. I want users to be able to create itineraries for any type of trip, and to be able to share them with others as well as view lists of other itineraries if they want to see what others have done. The difference between this and other itinerary apps is that this app generalizes the concept of an itinerary to be date independent so users can create and share itineraries with other people who are on different dates. Then users can adopt an itinerary as their own by copying it and editing it to their own dates. There would be a catalog of itineraries that users can browse and adopt as their own. 
+
+# Tech Stack
+
+- TypeScript
+- Next.js
+- Material UI
+- Tailwind
+- Drizzle
+- Supabase
+
+# Project Structure
+
+The project is organized into the following folders:
+- `src/app`: App router
+- `src/components`: Shared components
+- `src/hooks`: Custom hooks
+- `src/server`: Server-side code
+- `src/types`: TypeScript types
+
+Not all folders are in place yet, more will be added as they are needed and make sense. If you feel like a folder is missing, ask the human for further guidance.
+
+

@@ -1,0 +1,14 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Code Quality
+
+- Always write docstrings/comments when code is not completely-obvious from its name alone. This goes for both technical details and business logic.
+- Code is formatted with Prettier and linted with ESLint. Always format code after making changes.
+- Files should be concise and broken up if they get too large. For example, components really shouldn't be over 500 lines unless they absolutely need to, and services should similarly be broken up if they handle too many features. If a file is getting large (500 lines+) and it is unclear how to split, ask the human for further guidance.
+- Always write code with the human in mind. The human is the one who will be reading and maintaining the code, so make it as readable and understandable as possible.
+- Always write code that is in line with the rest of the codebase. If the codebase is using a certain pattern, use that pattern. If the codebase is using a certain library, use that library. If the codebase is using a certain style, use that style.
+- Always write code with the expectation that it will need to be maintained and updated. Don't write code that is difficult to maintain or update.

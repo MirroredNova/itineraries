@@ -4,7 +4,7 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren } from 'react';
 import './globals.css';
 import theme from '@/theme';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/ui/Navbar';
 import Container from '@mui/material/Container';
 
 const roboto = Roboto({
@@ -14,7 +14,7 @@ const roboto = Roboto({
   variable: '--font-roboto',
 });
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={roboto.variable}>
