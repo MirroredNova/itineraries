@@ -8,6 +8,48 @@
       "when": 1752309775915,
       "tag": "0000_jazzy_slipstream",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1752358483297,
+      "tag": "0001_tiny_meteorite",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752362389049,
+      "tag": "0002_same_joseph",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1752363208298,
+      "tag": "0003_striped_mac_gargan",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1752377574029,
+      "tag": "0004_rare_mockingbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1752650395176,
+      "tag": "0005_slim_roughhouse",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1752650415794,
+      "tag": "0006_clumsy_whizzer",
+      "breakpoints": true
     }
   ]
 }

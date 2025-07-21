@@ -1,0 +1,132 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Itineraries App Style Guide (MUI)
+
+# About
+
+All styles should be in line with the rest of the codebase. If the codebase is using a certain pattern, use that pattern. If the codebase is using a certain library, use that library. If the codebase is using a certain style, use that style. It is also important that the styles are mobile compatible.
+
+## Color Palette
+
+| Role         | Color   | Example Use              |
+| ------------ | ------- | ------------------------ |
+| Primary      | #1976d2 | Buttons, highlights      |
+| Secondary    | #9c27b0 | Chips, secondary actions |
+| Background   | #f8fafc | App background           |
+| Paper        | #fff    | Cards, modals            |
+| Text Primary | #1a202c | Main text                |
+| Text Second. | #64748b | Subtext, hints           |
+| Divider      | #e2e8f0 | Card/list separators     |
+
+## Typography
+
+- **Font:** Roboto, sans-serif
+- **Headings:**
+  - h1: 2.5rem, 700
+  - h2: 2rem, 700
+  - h3: 1.75rem, 600
+  - h4: 1.5rem, 600
+  - h5: 1.25rem, 600
+  - h6: 1.125rem, 600
+- **Body:**
+  - body1: 1rem
+  - body2: 0.875rem
+- **Button:** No uppercase, 500 weight
+
+## Spacing & Layout
+
+- **Base spacing:** 8px grid (`spacing={1}` = 8px)
+- **Cards:** 12px border radius, shadow, 24–32px padding
+- **Stack:** Use `spacing={2}` or `spacing={3}` for vertical rhythm
+- **Modals:** 16–32px padding, 12px border radius
+
+## Buttons
+
+- **Primary:** `variant="contained" color="primary"`
+- **Secondary:** `variant="outlined" color="primary"`
+- **Full width:** Only for forms or mobile
+- **No uppercase:** Buttons use normal case
+
+## Forms
+
+- **TextField:** `size="small" fullWidth`
+- **Consistent spacing:** Use `Stack` for form fields
+
+## Lists & Cards
+
+- **ListItem:** 8px border radius, hover background
+- **Card:** 12px border radius, shadow, padding
+
+## Alerts & Empty States
+
+- Use MUI `Alert` or `Card` with centered `Typography`
+
+## Example Components
+
+### Button
+
+```tsx
+<Button variant="contained" color="primary" size="large">
+  Save
+</Button>
+<Button variant="outlined" color="primary" size="large">
+  Cancel
+</Button>
+```
+
+### Card
+
+```tsx
+<Card sx={{ p: 4, borderRadius: 2 }}>
+  <Typography variant="h5">Title</Typography>
+  <Typography variant="body2" color="text.secondary">
+    Description
+  </Typography>
+</Card>
+```
+
+### Form
+
+```tsx
+<Stack spacing={3}>
+  <TextField label="Name" size="small" fullWidth />
+  <TextField label="Email" size="small" fullWidth />
+  <Button variant="contained" color="primary" size="large">
+    Submit
+  </Button>
+</Stack>
+```
+
+### List
+
+```tsx
+<List>
+  <ListItem
+    sx={{
+      borderRadius: 1,
+      mb: 1,
+      '&:hover': { backgroundColor: 'rgba(25, 118, 210, 0.04)' },
+    }}
+  >
+    <Typography>Item</Typography>
+  </ListItem>
+</List>
+```
+
+## Best Practices
+
+- Use the theme for all colors, spacing, and typography.
+- Prefer MUI layout (`Box`, `Stack`, `Container`) over custom CSS or Tailwind.
+- Use `sx` prop for one-off style tweaks, but keep most styles in the theme.
+- Use `Typography` for all text, never raw `<p>`/`<h1>`/etc.
+- Use `Button` for all actions, never raw `<button>`.
+- Use `Card` for all major content blocks.
+- Use `Alert` for errors and empty states.
+- Keep forms accessible: label every field, use `required` where needed.
+- Keep spacing and alignment consistent using `Stack` and theme spacing.
+
+---

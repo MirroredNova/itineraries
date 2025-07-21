@@ -1,0 +1,1 @@
+ALTER TABLE "Templates" DROP COLUMN "num_days";

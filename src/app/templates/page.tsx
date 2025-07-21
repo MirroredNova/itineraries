@@ -1,12 +1,11 @@
-import React from 'react';
-import Stack from '@mui/material/Stack';
+import { Box } from '@mui/material';
 import TemplatesList from '@/components/pages/templates/TemplatesList';
 
 const TemplatePage = () => {
   return (
-    <Stack spacing={2} direction="row">
+    <Box sx={{ py: 2 }}>
       <TemplatesList />
-    </Stack>
+    </Box>
   );
 };
 

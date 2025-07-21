@@ -1,0 +1,1 @@
+ALTER TABLE "TemplateGroups" ADD COLUMN "parent_group_id" integer;

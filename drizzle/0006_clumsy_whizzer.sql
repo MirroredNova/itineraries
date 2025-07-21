@@ -1,0 +1,1 @@
+ALTER TABLE "TemplateItems" ADD COLUMN "field_data" json;

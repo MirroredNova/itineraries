@@ -1,64 +1,90 @@
 import { signOutAction } from '@/server/actions/auth.actions';
 import { auth } from '@/server/utils/auth/auth';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Stack,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
 
 const Navbar = async () => {
   const session = await auth();
+
   return (
-    <Container
-      component="nav"
-      className="h-16 fixed top-0 left-0 min-w-full bg-white"
+    <AppBar
+      position="fixed"
+      elevation={0}
+      sx={{
+        backgroundColor: 'background.paper',
+        borderBottom: 1,
+        borderColor: 'divider',
+        zIndex: 1201,
+      }}
     >
-      <Stack
-        className="h-full"
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Link href="/" className="flex items-center">
-          <Typography variant="h5">Itineraries</Typography>
-        </Link>
-        <Stack direction="row" spacing={2} alignItems="center">
-          <Link href="/templates">
-            <Typography variant="body1" color="primary">
-              Templates
-            </Typography>
-          </Link>
-          <Link href="/itineraries">
-            <Typography variant="body1" color="primary">
+      <Container maxWidth="lg">
+        <Toolbar sx={{ minHeight: 64 }}>
+          <Link href="/" style={{ textDecoration: 'none' }}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: 'primary.main',
+                fontWeight: 600,
+                '&:hover': {
+                  color: 'primary.dark',
+                },
+              }}
+            >
               Itineraries
             </Typography>
           </Link>
-        </Stack>
-        <Stack direction="row" spacing={2}>
-          {session ? (
-            <form action={signOutAction}>
-              <Button variant="outlined" color="primary" type="submit">
-                Sign out
-              </Button>
-            </form>
-          ) : (
-            <>
-              <Link href="/sign-in">
-                <Button type="submit" variant="contained" color="primary">
-                  Sign in
+
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Stack direction="row" spacing={3} alignItems="center">
+            <Link href="/templates" style={{ textDecoration: 'none' }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'text.primary',
+                  '&:hover': {
+                    color: 'primary.main',
+                  },
+                }}
+              >
+                Templates
+              </Typography>
+            </Link>
+          </Stack>
+
+          <Stack direction="row" spacing={2} sx={{ ml: 3 }}>
+            {session ? (
+              <form action={signOutAction}>
+                <Button variant="outlined" color="primary" type="submit">
+                  Sign out
                 </Button>
-              </Link>
-              <Link href="/sign-up">
-                <Button variant="outlined" color="primary">
-                  Sign up
-                </Button>
-              </Link>
-            </>
-          )}
-        </Stack>
-      </Stack>
-    </Container>
+              </form>
+            ) : (
+              <>
+                <Link href="/sign-in" style={{ textDecoration: 'none' }}>
+                  <Button variant="contained" color="primary">
+                    Sign in
+                  </Button>
+                </Link>
+                <Link href="/sign-up" style={{ textDecoration: 'none' }}>
+                  <Button variant="outlined" color="primary">
+                    Sign up
+                  </Button>
+                </Link>
+              </>
+            )}
+          </Stack>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 
